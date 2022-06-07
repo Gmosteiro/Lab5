@@ -1,17 +1,17 @@
-#ifndef JUGADOR
-#define JUGADOR
+#ifndef DESARROLLADOR
+#define DESARROLLADOR
 #include <string>
 #include "Usuario.h"
 using namespace std;
 
-class Desarrollador: public Desarrollador{
+class Desarrollador: public Usuario{
 private:
-    string nomemp;
+    string nomEmp;
 public:
     Desarrollador();
-    Desarrollador(string nomemp);
-    string getNomemp();
-    void setNomemp(string nomemp);
+    Desarrollador(string email, string pass, string nomEmp);
+    string getNomEmp();
+    void setNomEmp(string nomEmp);
     ~Desarrollador();   
 };
 #endif

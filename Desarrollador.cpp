@@ -1,15 +1,16 @@
 #include "Desarrollador.h"
 
     Desarrollador::Desarrollador(){}
-    Desarrollador::Desarrollador(string nomemp){
-        this->nomemp = nomemp;
-        this->nomemp = nomemp;
+    Desarrollador::Desarrollador(string email, string pass, string nomEmp){
+        setEmail(email);
+        setPass(pass);
+        this->nomEmp = nomEmp;
     }
-    string Desarrollador::getNomemp(){
-        return this->nomemp;
+    string Desarrollador::getNomEmp(){
+        return this->nomEmp;
     }
-    void Desarrollador::setNomemp(string nomemp){
-        this->nomemp = nomemp;
+    void Desarrollador::setNomEmp(string nomEmp){
+        this->nomEmp = nomEmp;
     }
     Desarrollador::~Desarrollador(){}  
 

@@ -2,6 +2,7 @@
 #define JUGADOR
 #include <string>
 #include "Usuario.h"
+
 using namespace std;
 
 class Jugador: public Usuario{
@@ -9,7 +10,7 @@ private:
     string nick, desc;
 public:
     Jugador();
-    Jugador(string nick, string desc);
+    Jugador(string email, string pass, string nick, string desc);
     string getNick();
     void setNick(string nick);
     string getDesc();

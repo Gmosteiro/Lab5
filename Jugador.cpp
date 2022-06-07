@@ -1,7 +1,9 @@
 #include "Jugador.h"
 
     Jugador::Jugador(){}
-    Jugador::Jugador(string nick, string desc){
+    Jugador::Jugador(string email, string pass, string nick, string desc){
+        setEmail(email);
+        setPass(pass);
         this->nick = nick;
         this->desc = desc;
     }
