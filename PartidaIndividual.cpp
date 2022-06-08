@@ -13,3 +13,4 @@
         this->continua = continua;
     }
     PartidaIndividual::~PartidaIndividual(){}
+      //CUNFUSED UNGA BUNGA

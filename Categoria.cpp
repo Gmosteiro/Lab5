@@ -1,10 +1,17 @@
 #include "Categoria.h"
 
     Categoria::Categoria(){}
-    Categoria::Categoria(string genero, string plataforma, string desc){
+    Categoria::Categoria(int id, string genero, string plataforma, string desc){
+        this->id = id;
         this->genero = genero;
         this->plataforma = plataforma;
         this->desc = desc;
+    }
+    int Categoria::getId(){
+        return this->id;
+    }
+    void Categoria::setId(int id){
+        this->id = id;
     }
     string Categoria::getGenero(){
         return this->genero;

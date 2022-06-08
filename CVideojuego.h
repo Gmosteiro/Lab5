@@ -1,6 +1,8 @@
 #ifndef CVIDEOJUEGO
 #define CVIDEOJUEGO
 #include "ICVideojuego.h"
+#include "ManejadorCategoria.h"
+#include "Sesion.h"
 
 using namespace std;
 
@@ -9,13 +11,14 @@ class CVideojuego: public ICVideojuego{
         string nombre, desc;
         int costo, cantJugadores, duracion;
         bool continua, transmitido;
-        map<DTCategoria, Categoria*> cat;
+        map<int, Categoria*> cat;
     public:
         void verInformacionVideojuego();
         void eliminarVideojuego();
         void agregarVideojuego();
         void iniciarPartida();
         
+
         void ingresarNombre(string nombre);
         void ingresarDescripcion(string desc);
         void ingresarCosto(int costo);
@@ -23,7 +26,7 @@ class CVideojuego: public ICVideojuego{
         void ingresarDuracion(int duracion);
         void ingresarContinua(bool continua);
         void ingresarTrasmitido (bool transmitido);
-        void ingresarCategoria (DTCategoria dtCat, Categoria* cat);
+        bool ingresarCategoria (int id);
 };
 
 #endif

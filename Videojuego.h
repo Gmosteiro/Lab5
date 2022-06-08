@@ -1,6 +1,9 @@
 #ifndef VIDEOJUEGO
 #define VIDEOJUEGO
 #include <string>
+#include <map>
+#include "Usuario.h"
+#include "Categoria.h"
 
 using namespace std;
 
@@ -8,9 +11,12 @@ class Videojuego{
 private:
     string nombre, desc;
     int costo, totalHoras;
+    Usuario* desarrollador;
+    map<int,Categoria*> categorias;
+
 public:
     Videojuego();
-    Videojuego(string nombre, string desc, int costo, int totalHoras);
+    Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<int,Categoria*> categorias);
     string getNombre();
     void setNombre(string nombre);
     string getDesc();
@@ -19,6 +25,10 @@ public:
     void setCosto(int costo);
     int getTotalHoras();
     void setTotalHoras(int totalHoras);
+    Usuario* getDesarrollador();
+    void setDesarrollador(Usuario* desarrollador);
+    map<int,Categoria*> getCategorias();
+    void setCategorias(map<int,Categoria*> categorias);
     ~Videojuego();   
 };
 #endif

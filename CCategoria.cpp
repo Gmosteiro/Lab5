@@ -7,11 +7,16 @@ bool CCategoria::agregarCategoria(){
     return mc->agregarCategoria(cat);
 
 }
-void CCategoria::ingresarDatos(string genero, string plataforma, string desc){
-    this->genero = genero;
-    this->plataforma=plataforma;
-    this->desc=desc;
+void CCategoria::ingresarGenero(string genero){
+    this->
 }
+void CCategoria::ingresarPlataforma(string plataforma){
+
+}
+void CCategoria::ingresarDesc(string desc){
+
+}
+
 void CCategoria::cancelar(){
 //cancela
 }

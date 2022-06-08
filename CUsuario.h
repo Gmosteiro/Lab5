@@ -10,11 +10,11 @@ using namespace std;
 
 class CUsuario: public ICUsuario{
     private:
-        string email, pass, empNom, nickname, desc;
+        string email, pass, nomEmp, nickname, desc;
     public:
         bool altaUsuario();
         void datosComunes(string email, string pass);
-        void datosEmpresa(string empNom);
+        void datosEmpresa(string nomEmp);
         bool datosJugador(string nickname, string desc);
         void cancelar();
 };

@@ -13,7 +13,9 @@ class ICCategoria{
     public:
         virtual bool agregarCategoria()=0;
 
-        virtual void ingresarDatos(string genero, string plataforma, string desc) = 0;
+        virtual void ingresarGenero(string genero) = 0;
+        virtual void ingresarPlataforma(string plataforma) = 0;
+        virtual void ingresarDesc(string desc) = 0;
         virtual void cancelar()=0;
         
 };     

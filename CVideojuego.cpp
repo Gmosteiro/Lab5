@@ -7,11 +7,15 @@
 
     }
     void CVideojuego::agregarVideojuego(){
-
+        Sesion* s = Sesion::getInstancia();
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat);
+        mv->agregarVideojuego(v);
     }
     void CVideojuego::iniciarPartida(){
 
     }
+    //CUNFUSED UNGA BUNGA 
 
     void CVideojuego::ingresarNombre(string nombre){
         this->nombre = nombre;
@@ -39,6 +43,14 @@
         this->transmitido = transmitido;
 
     }
-    void CVideojuego::ingresarCategoria (DTCategoria dtCat, Categoria* cat){
-        this->cat.insert({dtCat,cat});
+    bool CVideojuego::ingresarCategoria(int id){
+        bool salida = false;
+        ManejadorCategoria* mc = ManejadorCategoria::getInstancia();
+        Categoria* cat;
+            if(mc->existeCategoria(id)){
+                cat=mc->getCategoria(id);
+                this->cat.insert({id,cat});
+                salida = true;
+            }
+        return salida;
     }

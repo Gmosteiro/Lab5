@@ -7,24 +7,18 @@
 #include <map>
 #include <list>
 
-std::string str = "Hello World";
-
-
-
 class ManejadorCategoria{
     private: 
         static ManejadorCategoria* instancia;
         ManejadorCategoria();
-        map<string, Categoria*> colCategorias;
-        string key;
-        void setKey(string data);
+        map<int, Categoria*> colCategorias;
     public:
         static ManejadorCategoria* getInstancia();
         list<Categoria*> getCategorias();
-        Categoria* getCategoria(string);
+        Categoria* getCategoria(int);
         void removerCategoria(Categoria*);
         bool agregarCategoria(Categoria*);
-        bool existeCategoria(string);
+        bool existeCategoria(int);
         ~ManejadorCategoria(); 
 };
 #endif

@@ -6,10 +6,13 @@ using namespace std;
 
 class Categoria{
 private:
+    int id;
     string genero, plataforma, desc;
 public:
     Categoria();
-    Categoria(string genero, string plataforma, string desc);
+    Categoria(int id, string genero, string plataforma, string desc);
+    int getId();
+    void setId(int id);
     string getGenero();
     void setGenero(string genero);
     string getPlataforma();
