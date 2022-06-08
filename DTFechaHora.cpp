@@ -1,4 +1,4 @@
-#include "DTFechaHora.h"
+#include "./Datatypes/DTFechaHora.h"
 
         DTFechaHora::DTFechaHora(){}
         DTFechaHora::DTFechaHora(int dia, int mes, int anio, int hora, int minuto){

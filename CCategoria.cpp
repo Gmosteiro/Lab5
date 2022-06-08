@@ -1,4 +1,4 @@
-#include "CCategoria.h"
+#include "./Headers/CCategoria.h"
 
 bool CCategoria::agregarCategoria(){
 

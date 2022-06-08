@@ -1,4 +1,4 @@
-#include "Partida.h"
+#include "./Headers/Partida.h"
 
     Partida::Partida(){}
     Partida::Partida(DTFechaHora fechaHora, int duracion){

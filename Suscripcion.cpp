@@ -1,4 +1,4 @@
-#include "Suscripcion.h"
+#include "./Headers/Suscripcion.h"
 
     Suscripcion::Suscripcion(){}
     Suscripcion::Suscripcion(DTFechaHora fechaHora, TipoPago tipo){

@@ -1,8 +1,8 @@
 
-#include "Fabrica.h"
-#include "CCategoria.h"
-#include "CUsuario.h"
-#include "CVideojuego.h"
+#include "./Headers/Fabrica.h"
+#include "./Headers/CCategoria.h"
+#include "./Headers/CUsuario.h"
+#include "./Headers/CVideojuego.h"
 
 Fabrica* Fabrica::instancia = NULL;
 

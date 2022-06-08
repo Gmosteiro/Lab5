@@ -1,4 +1,4 @@
-#include "Categoria.h"
+#include "./Headers/Categoria.h"
 
     Categoria::Categoria(){}
     Categoria::Categoria(int id, string genero, string plataforma, string desc){

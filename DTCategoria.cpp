@@ -1,4 +1,4 @@
-#include "DTCategoria.h"
+#include "./Datatypes/DTCategoria.h"
 
         DTCategoria::DTCategoria(){}
         DTCategoria::DTCategoria(string genero, string plataforma){

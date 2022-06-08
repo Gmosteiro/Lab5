@@ -1,4 +1,4 @@
-#include "CVideojuego.h"
+#include "./Headers/CVideojuego.h"
 
     void CVideojuego::CVideojuego::verInformacionVideojuego(){
 

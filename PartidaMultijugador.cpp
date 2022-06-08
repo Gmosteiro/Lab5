@@ -1,4 +1,4 @@
-#include "PartidaMultijugador.h"
+#include "./Headers/PartidaMultijugador.h"
     PartidaMultijugador::PartidaMultijugador(){}
     PartidaMultijugador::PartidaMultijugador(DTFechaHora fechaHora, int duracion, bool transmitido, int cantJugadores){
         setDTFechaHora(fechaHora);

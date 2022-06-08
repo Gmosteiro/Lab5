@@ -1,4 +1,4 @@
-#include "Videojuego.h"
+#include "./Headers/Videojuego.h"
 
     Videojuego::Videojuego(){}
     Videojuego::Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<int,Categoria*> categorias){

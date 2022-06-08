@@ -1,4 +1,4 @@
-#include "Jugador.h"
+#include "./Headers/Jugador.h"
 
     Jugador::Jugador(){}
     Jugador::Jugador(string email, string pass, string nick, string desc){

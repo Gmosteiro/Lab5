@@ -1,4 +1,4 @@
-#include "PartidaIndividual.h"
+#include "./Headers/PartidaIndividual.h"
 
     PartidaIndividual::PartidaIndividual(){}
     PartidaIndividual::PartidaIndividual(DTFechaHora fechaHora, int duracion, bool continua){

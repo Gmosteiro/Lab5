@@ -1,4 +1,4 @@
-#include "ManejadorVideojuego.h"
+#include "./Headers/ManejadorVideojuego.h"
 
 ManejadorVideojuego::ManejadorVideojuego(){}
 
