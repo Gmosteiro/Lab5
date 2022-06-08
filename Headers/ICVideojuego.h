@@ -1,6 +1,6 @@
 #ifndef ICVIDEOJUEGO
 #define ICVIDEOJUEGO
-#include "DTCategoria.h"
+#include "../Datatypes/DTCategoria.h"
 #include "Categoria.h"
 
 #include<string>
@@ -23,10 +23,10 @@ class ICVideojuego{
         virtual void ingresarDuracion(int duracion)=0;
         virtual void ingresarContinua(bool continua) = 0;
         virtual void ingresarTrasmitido (bool transmitido)=0;
-        virtual bool ingresarCategoria (int id)=0;
+        virtual bool ingresarCategoria (string id)=0;
         
-};     
-
-//modification 06/06/22
+};
 
 #endif
+
+//modification 06/06/22

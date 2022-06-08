@@ -1,7 +1,7 @@
 #ifndef SUSCRIPCION
 #define SUSCRIPCION
 #include <string>
-#include "DTFechaHora.h"
+#include "../Datatypes/DTFechaHora.h"
 #include "TipoPago.h"
 
 using namespace std;

@@ -11,14 +11,15 @@ class ManejadorCategoria{
     private: 
         static ManejadorCategoria* instancia;
         ManejadorCategoria();
-        map<int, Categoria*> colCategorias;
+        map<string, Categoria*> colCategorias;
     public:
         static ManejadorCategoria* getInstancia();
         list<Categoria*> getCategorias();
-        Categoria* getCategoria(int);
+        Categoria* getCategoria(string);
         void removerCategoria(Categoria*);
         bool agregarCategoria(Categoria*);
-        bool existeCategoria(int);
+        bool existeCategoria(string);
+        string setKey(string);
         ~ManejadorCategoria(); 
 };
 #endif

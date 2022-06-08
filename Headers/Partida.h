@@ -1,6 +1,6 @@
 #ifndef PARTIDA
 #define PARTIDA
-#include "DTFechaHora.h"
+#include "../Datatypes/DTFechaHora.h"
 
 using namespace std;
 

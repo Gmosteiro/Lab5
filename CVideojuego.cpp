@@ -12,9 +12,7 @@
         Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat);
         mv->agregarVideojuego(v);
     }
-    void CVideojuego::iniciarPartida(){
-
-    }
+    void CVideojuego::iniciarPartida(){}
     //CUNFUSED UNGA BUNGA 
 
     void CVideojuego::ingresarNombre(string nombre){
@@ -22,28 +20,23 @@
     }
     void CVideojuego::ingresarDescripcion(string desc){
         this->desc = desc;
-
     }
     void CVideojuego::ingresarCosto(int costo){
         this->costo = costo;
-
     }
     void CVideojuego::ingresarCantJugadores(int cantJugadores){
         this->cantJugadores = cantJugadores;
     }
     void CVideojuego::ingresarDuracion(int duracion){
         this->duracion = duracion;
-
     }
     void CVideojuego::ingresarContinua(bool continua){
         this->continua = continua;
-
     }
     void CVideojuego::ingresarTrasmitido(bool transmitido){
         this->transmitido = transmitido;
-
     }
-    bool CVideojuego::ingresarCategoria(int id){
+    bool CVideojuego::ingresarCategoria(string id){
         bool salida = false;
         ManejadorCategoria* mc = ManejadorCategoria::getInstancia();
         Categoria* cat;

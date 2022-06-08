@@ -1,6 +1,6 @@
 #ifndef PARTIDAINDIVIDUAL
 #define PARTIDAINDIVIDUAL
-#include "DTFechaHora.h"
+#include "../Datatypes/DTFechaHora.h"
 #include "Partida.h"
 
 class PartidaIndividual: public Partida{

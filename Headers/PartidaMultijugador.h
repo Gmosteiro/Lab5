@@ -1,6 +1,6 @@
 #ifndef PARTIDAMULTIJUGADOR
 #define PARTIDAMULTIJUGADOR
-#include "DTFechaHora.h"
+#include "../Datatypes/DTFechaHora.h"
 #include "Partida.h"
 
 class PartidaMultijugador: public Partida{

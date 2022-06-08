@@ -12,15 +12,15 @@ ManejadorCategoria* ManejadorCategoria::getInstancia(){
 
 list<Categoria*> ManejadorCategoria::getCategorias(){
     list<Categoria*> aux;
-    for(map<int,Categoria*>::iterator it = this->colCategorias.begin(); 
+    for(map<string,Categoria*>::iterator it = this->colCategorias.begin(); 
     it != this->colCategorias.end(); it++)
         aux.push_back(it->second);
     return aux;
 }
 
-Categoria* ManejadorCategoria::getCategoria(int codigo){
+Categoria* ManejadorCategoria::getCategoria(string codigo){
     Categoria* aux = NULL;
-    map<int,Categoria*>::iterator it = this->colCategorias.find(codigo);
+    map<string,Categoria*>::iterator it = this->colCategorias.find(codigo);
     if (it != colCategorias.end()){
         aux = it->second;
     }
@@ -28,19 +28,32 @@ Categoria* ManejadorCategoria::getCategoria(int codigo){
 }
 
 void ManejadorCategoria::removerCategoria(Categoria* cat){
-    map<int,Categoria*>::iterator it = this->colCategorias.find(cat->getId());
+    map<string,Categoria*>::iterator it = this->colCategorias.find(cat->getId());
     this->colCategorias.erase(it);
 }
 
-bool ManejadorCategoria::existeCategoria(int codigo){
-    map<int,Categoria*>::iterator it = this->colCategorias.find(codigo);    
+bool ManejadorCategoria::existeCategoria(string codigo){
+    map<string,Categoria*>::iterator it = this->colCategorias.find(codigo);    
     return  (it != this->colCategorias.end());
 }
 
 bool ManejadorCategoria::agregarCategoria(Categoria* cat){
-    cat->setId(this->colCategorias.size()+1);
-    this->colCategorias.insert({cat->getId(), cat});
-    return existeCategoria(cat->getId());
+    bool salida = false;
+    cat->setId(setKey(cat->getGenero()+'_'+cat->getPlataforma()));
+    if(!existeCategoria(cat->getId())){
+        this->colCategorias.insert({cat->getId(), cat});
+        salida = true;
+    }
+    return salida;
 }
-                
+
+string ManejadorCategoria::setKey(string data){
+
+    std::for_each(data.begin(), data.end(), [](char & upperKey) {
+        upperKey = ::toupper(upperKey);
+    });
+
+    return data;    
+
+}                
 ManejadorCategoria::~ManejadorCategoria(){}

@@ -8,8 +8,7 @@ using namespace std;
 
 class CCategoria: public ICCategoria{
     private:
-        int id;
-        string genero, plataforma, desc;
+        string id, genero, plataforma, desc;
     public:
         bool agregarCategoria();
 

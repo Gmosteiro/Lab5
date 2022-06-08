@@ -13,7 +13,7 @@ class CVideojuego: public ICVideojuego{
         string nombre, desc;
         int costo, cantJugadores, duracion;
         bool continua, transmitido;
-        map<int, Categoria*> cat;
+        map<string, Categoria*> cat;
     public:
         void verInformacionVideojuego();
         void eliminarVideojuego();
@@ -28,7 +28,7 @@ class CVideojuego: public ICVideojuego{
         void ingresarDuracion(int duracion);
         void ingresarContinua(bool continua);
         void ingresarTrasmitido (bool transmitido);
-        bool ingresarCategoria (int id);
+        bool ingresarCategoria (string id);
 };
 
 #endif

@@ -1,6 +1,6 @@
 #ifndef ICCATEGORIA
 #define ICCATEGORIA
-#include "DTCategoria.h"
+#include "../Datatypes/DTCategoria.h"
 #include "Categoria.h"
 
 #include<string>
