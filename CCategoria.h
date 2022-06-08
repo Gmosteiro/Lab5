@@ -8,11 +8,14 @@ using namespace std;
 
 class CCategoria: public ICCategoria{
     private:
+        int id;
         string genero, plataforma, desc;
     public:
         bool agregarCategoria();
 
-        void ingresarDatos(string genero, string plataforma, string desc);
+        void ingresarGenero(string genero);
+        void ingresarPlataforma(string plataforma);
+        void ingresarDesc(string desc);
         void cancelar();
 };
 

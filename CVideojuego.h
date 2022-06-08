@@ -2,6 +2,8 @@
 #define CVIDEOJUEGO
 #include "ICVideojuego.h"
 #include "ManejadorCategoria.h"
+#include "ManejadorVideojuego.h"
+#include "Videojuego.h"
 #include "Sesion.h"
 
 using namespace std;

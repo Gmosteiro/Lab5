@@ -23,7 +23,7 @@ class ICVideojuego{
         virtual void ingresarDuracion(int duracion)=0;
         virtual void ingresarContinua(bool continua) = 0;
         virtual void ingresarTrasmitido (bool transmitido)=0;
-        virtual bool ingresarCategoria (int id, Categoria* cat)=0;
+        virtual bool ingresarCategoria (int id)=0;
         
 };     
 

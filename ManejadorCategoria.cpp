@@ -38,9 +38,7 @@ bool ManejadorCategoria::existeCategoria(int codigo){
 }
 
 bool ManejadorCategoria::agregarCategoria(Categoria* cat){
-
     cat->setId(this->colCategorias.size()+1);
-
     this->colCategorias.insert({cat->getId(), cat});
     return existeCategoria(cat->getId());
 }
