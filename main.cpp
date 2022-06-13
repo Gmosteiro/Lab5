@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ICUsuario.h"
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -23,6 +24,9 @@
 
 
 using namespace std;
+ICUsuario *IContusuario;
+
+
 
 
 void menu() {
@@ -72,6 +76,17 @@ void menuAltaDeUsuario() {
     cout << "----------------------------------------------" << endl;
     cout << "______________Alta de usuario_________________" << endl;
     cout << "----------------------------------------------" << endl;
+string pass, email;
+cout<< "Ingrese contraseña: \n"<< endl;
+cin >> pass;
+cout<< "Ingrese email: \n"<< endl;
+cin >> email;
+
+IContusuario->datosComunes(email, pass);
+
+
+
+    
 }
 
 int main() {
