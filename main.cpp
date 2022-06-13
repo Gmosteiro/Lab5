@@ -1,5 +1,13 @@
 #include <iostream>
 
+#include "./Headers/Fabrica.h"
+#include "./Headers/ICCategoria.h"
+#include "./Headers/ICSesion.h"
+#include "./Headers/ICUsuario.h"
+#include "./Headers/ICVideojuego.h"
+
+
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@(**,,,,,,,,,,,,,**#@@@@@@@@@@@@@@@
@@ -24,6 +32,11 @@
 
 using namespace std;
 
+Fabrica *Factorio;
+ICCategoria *IContCategoria;
+ICSesion *IContSesion;
+ICVideojuego *IContVideojuego;
+ICUsuario *IContUsuario;
 
 void menu() {
     cout << "______________________________________________________\n" << endl;
@@ -75,6 +88,15 @@ void menuAltaDeUsuario() {
 }
 
 int main() {
+
+    //DEJAR AFUERA DEL WHILE
+
+    Factorio = Fabrica::getInstancia();
+
+    //DEJAR AFUERA DEL WHILE
+
+
+
      int opcion = 0;
 
     try {
