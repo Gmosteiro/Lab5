@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ICUsuario.h"
 
 #include "./Headers/Fabrica.h"
 #include "./Headers/ICCategoria.h"
@@ -31,6 +32,9 @@
 
 
 using namespace std;
+ICUsuario *IContusuario;
+
+
 
 Fabrica *Factorio;
 ICCategoria *IContCategoria;
@@ -85,6 +89,17 @@ void menuAltaDeUsuario() {
     cout << "----------------------------------------------" << endl;
     cout << "______________Alta de usuario_________________" << endl;
     cout << "----------------------------------------------" << endl;
+string pass, email;
+cout<< "Ingrese contraseña: \n"<< endl;
+cin >> pass;
+cout<< "Ingrese email: \n"<< endl;
+cin >> email;
+
+IContusuario->datosComunes(email, pass);
+
+
+
+    
 }
 
 int main() {
