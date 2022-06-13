@@ -1,5 +1,6 @@
 #include "./Headers/CUsuario.h"
 
+
     bool CUsuario::altaUsuario(){
 
         bool inserted = false;
@@ -22,8 +23,35 @@
         this->nomEmp = nomEmp;
     }
     bool CUsuario::datosJugador(string nickname, string desc){
-        this->nickname=nickname;
         this->desc=desc;
+        this->nickname=nickname;
+        ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
+            
+        map<string,Usuario*> auxj=mu->getUsuarios();
+        map<string,Jugador*> aux;
+
+        map<string,Usuario*>::iterator iter = auxj.begin();;
+
+        while(iter != auxj.end())
+        {
+            Jugador* jug = dynamic_cast<Jugador*>(&*iter);
+                if(jug != NULL)
+                    {                
+                        Jugador* P = new Jugador(jug->getEmail(), jug->getPass(),jug->getNick(),jug->getDesc());
+                        aux.insert({jug->getNick(),jug});
+                    }
+        }
+        
+        
+            
+        
+
+
+
+    return  NULL;
+
+        
+        
     }
     void CUsuario::cancelar(){}
  

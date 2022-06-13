@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ICUsuario.h"
 
 #include "./Headers/Fabrica.h"
 #include "./Headers/ICCategoria.h"
@@ -32,15 +31,20 @@
 
 
 using namespace std;
-ICUsuario *IContusuario;
-
-
 
 Fabrica *Factorio;
 ICCategoria *IContCategoria;
 ICSesion *IContSesion;
 ICVideojuego *IContVideojuego;
 ICUsuario *IContUsuario;
+
+
+
+void leerString(string &aux){
+        cin >>ws;
+        getline(cin,aux);
+}
+
 
 void menu() {
     cout << "______________________________________________________\n" << endl;
@@ -86,19 +90,70 @@ void menuIniciarSesion() {
 }
 
 void menuAltaDeUsuario() {
+    
+    IContUsuario = Factorio->getICUsuario();
+    
+
     cout << "----------------------------------------------" << endl;
     cout << "______________Alta de usuario_________________" << endl;
     cout << "----------------------------------------------" << endl;
-string pass, email;
-cout<< "Ingrese contraseña: \n"<< endl;
-cin >> pass;
-cout<< "Ingrese email: \n"<< endl;
-cin >> email;
 
-IContusuario->datosComunes(email, pass);
+    try
+    {
+        string pass, email;
+        cout<< "Ingrese email: \n"<< endl;
+        leerString(email);
+        cout<< "Ingrese contraseña: \n"<< endl;
+        leerString(pass);
+        IContUsuario->datosComunes(email, pass);
 
+        int tipo;
+        cout << "Es desarrollador(1) o Usuario (2)? \n";
+        cin >> tipo;
+        switch (tipo)
+        {
+        case 1:{
+                string empresa;
+                cout << "Ingrese nombre de empresa: \n";
+                leerString(empresa);
+                IContUsuario->datosEmpresa(empresa);
+                IContUsuario->altaUsuario();
+            }
+            break;        
+        case 2:{
+                string nickname, descripcion;
+                cout << "Ingrese nickname \n";
+                leerString(nickname);
+                cout << "Ingrese decripcion \n";
+                leerString(descripcion);
+                bool a = IContUsuario->datosJugador(nickname,descripcion);
+                 while(a)
+                 {
+                 int opcion = 1;
+                    cout << "Ya existe un jugador con ese nickname! \n";
+                    cout << "Desea cancelar(0) o reintentar (1) \n";
+                    cin >> opcion;
+                    if(opcion !=0){
+                        
+                        leerString(nickname);
+                        a = IContUsuario->datosJugador(nickname,descripcion);
 
-
+                    }
+                    //cancelar hacelo sanit.jpg
+                    break;   
+                 }
+                    IContUsuario->altaUsuario();
+                }
+            break;
+        default:
+            throw invalid_argument("No existe el tipo " + tipo);
+            break;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
     
 }
 
@@ -109,8 +164,6 @@ int main() {
     Factorio = Fabrica::getInstancia();
 
     //DEJAR AFUERA DEL WHILE
-
-
 
      int opcion = 0;
 
@@ -123,6 +176,7 @@ int main() {
               switch (opcion) {
             case 1:
                 system("clear");
+                menuAltaDeUsuario();
                
                 break;
             case 2:

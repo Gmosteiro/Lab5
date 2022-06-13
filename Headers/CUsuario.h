@@ -1,6 +1,7 @@
 #ifndef CUSUARIO
 #define CUSUARIO
 #include "ICUsuario.h"
+#include "Usuario.h"
 #include "Desarrollador.h"
 #include "Jugador.h"
 #include "ManejadorUsuario.h"

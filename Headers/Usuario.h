@@ -14,6 +14,6 @@ public:
     void setEmail(string email);
     string getPass();
     void setPass(string pass);
-    ~Usuario();   
+    virtual ~Usuario();   
 };
 #endif

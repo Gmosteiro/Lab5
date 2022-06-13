@@ -1,6 +1,8 @@
 #ifndef MANEJADORUSUARIO
 #define MANEJADORUSUARIO
 #include "Usuario.h"
+#include "Jugador.h"
+#include "Desarrollador.h"
 #include <map>
 #include <list>
 

@@ -10,10 +10,10 @@ ManejadorUsuario*  ManejadorUsuario::getInstancia(){
     return instancia;
 }
 
-list<Usuario*> ManejadorUsuario::getUsuarios(){
-    list<Usuario*> aux;
+map<string,Usuario*> ManejadorUsuario::getUsuarios(){
+    map<string,Usuario*> aux;
     for(map<string,Usuario*>::iterator it = this->colUsuarios.begin(); it != this->colUsuarios.end(); it++)
-        aux.push_back(it->second);
+        aux.insert({it->first,it->second});
     return aux;
 }
 
@@ -40,7 +40,17 @@ bool ManejadorUsuario::existeUsuario(string email){
     map<string,Usuario*>::iterator it = this->colUsuarios.find(email);    
     return  (it != this->colUsuarios.end());
 }
+/*
+map<string,Jugador*> ManejadorUsuario::getJugadores(){
 
+}
+
+bool ManejadorUsuario::existeJugador(string nickname ){
+    map<string, Jugador*> jugs = getJugadores();
+    map<string,Jugador*>::iterator it = jugs.find(nickname);    
+            return  (it != jugs.end());
+}
+*/
 
 
 ManejadorUsuario::~ManejadorUsuario(){}
