@@ -38,8 +38,6 @@ ICSesion *IContSesion;
 ICVideojuego *IContVideojuego;
 ICUsuario *IContUsuario;
 
-
-
 void leerString(string &aux){
         cin >>ws;
         getline(cin,aux);
@@ -92,69 +90,83 @@ void menuIniciarSesion() {
 void menuAltaDeUsuario() {
     
     IContUsuario = Factorio->getICUsuario();
-    
-
     cout << "----------------------------------------------" << endl;
     cout << "______________Alta de usuario_________________" << endl;
     cout << "----------------------------------------------" << endl;
-
     try
     {
-        string pass, email;
+        string pass, email, empresa, nickname, descripcion;
+        int tipo = 0;
+        int opcion = 1;
+        bool a = false;
+
         cout<< "Ingrese email: \n"<< endl;
         leerString(email);
         cout<< "Ingrese contraseña: \n"<< endl;
         leerString(pass);
         IContUsuario->datosComunes(email, pass);
-
-        int tipo;
-        cout << "Es desarrollador(1) o Usuario (2)? \n";
+       
+        cout << "Es desarrollador(1) o Jugador (2)? \n"; //editado 13/06/2022
         cin >> tipo;
+
         switch (tipo)
         {
-        case 1:{
-                string empresa;
-                cout << "Ingrese nombre de empresa: \n";
-                leerString(empresa);
-                IContUsuario->datosEmpresa(empresa);
-                IContUsuario->altaUsuario();
-            }
-            break;        
-        case 2:{
-                string nickname, descripcion;
-                cout << "Ingrese nickname \n";
-                leerString(nickname);
-                cout << "Ingrese decripcion \n";
-                leerString(descripcion);
-                bool a = IContUsuario->datosJugador(nickname,descripcion);
-                 while(a)
-                 {
-                 int opcion = 1;
-                    cout << "Ya existe un jugador con ese nickname! \n";
-                    cout << "Desea cancelar(0) o reintentar (1) \n";
-                    cin >> opcion;
-                    if(opcion !=0){
-                        
-                        leerString(nickname);
-                        a = IContUsuario->datosJugador(nickname,descripcion);
-
-                    }
-                    //cancelar hacelo sanit.jpg
-                    break;   
-                 }
-                    IContUsuario->altaUsuario();
+            case 1:
+                {                
+                    cout << "Ingrese nombre de empresa: \n";
+                    leerString(empresa);
+                    IContUsuario->datosEmpresa(empresa);
                 }
-            break;
-        default:
-            throw invalid_argument("No existe el tipo " + tipo);
-            break;
+                break;        
+            case 2:
+                {                
+                    cout << "Ingrese nickname \n";
+                    leerString(nickname);
+                    cout << "Ingrese descripcion \n";
+                    leerString(descripcion);
+                    a = IContUsuario->datosJugador(nickname,descripcion);
+                    while(a)
+                    {                                            
+                        cout << "Ya existe un jugador con ese nickname! \n";
+                        cout << "Desea cancelar(0) o reintentar (1) \n";
+                        cin >> opcion;
+                        if(opcion !=0)
+                        {
+                            cout << "Ingrese el nuevo nickname \n";
+                            leerString(nickname);
+                            a = IContUsuario->datosJugador(nickname,descripcion);
+                        }
+                        else
+                        {
+                            system("clear");
+                            cout << "Operacion cancelada\n" << endl;
+                            IContUsuario->cancelar();
+                        }
+                    }             
+                }
+                break;
+            default:
+                throw invalid_argument("No existe el tipo seleccionado\n");
+                break;
+        }
+
+        cout << "Acepta(1) o Rechaza(0)?\n";
+        cin >> tipo;
+        
+        if(tipo == 1){
+            IContUsuario->altaUsuario();
+            system("clear");
+            cout <<"Usuario ingresado \n" << endl;        
+        }else{
+            system("clear"); 
+            cout << "Operacion cancelada\n" << endl;   
+            IContUsuario->cancelar();
         }
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-    }
-    
+    }    
 }
 
 int main() {
@@ -235,6 +247,7 @@ int main() {
                 system("clear");
               
                 break;
+                
             default:
                 cout << "\nSeleccione una opcion valida\n" << endl;
                 break;
@@ -243,7 +256,7 @@ int main() {
             cin.clear();
             cin >> opcion;
               }
-       
+       cout << "\033[0;31mS̷͉͐ė̷͔ǵ̷̭m̶̠̚e̶͍̍n̷̙͋t̵͓͊á̸̫t̵̨̓i̸̊͜o̵͔̽ṉ̴͐ ̸̮̑F̸͖̈́a̴̧̽u̷͉̓l̷̼̋t̸̰͗ ̸̦̃(̶̝͝C̴̳͊o̸̝̔r̵̘̍e̵̘͝ ̷̨͊D̶͖͘ų̸͆m̸̺̌p̵̩̃ȅ̴͇d̸̘̃)̴̡̃ \033[0;31m\n" << endl; //debadelai
     }
     catch (const std::exception& e)
     {

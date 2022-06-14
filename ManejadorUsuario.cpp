@@ -40,17 +40,6 @@ bool ManejadorUsuario::existeUsuario(string email){
     map<string,Usuario*>::iterator it = this->colUsuarios.find(email);    
     return  (it != this->colUsuarios.end());
 }
-/*
-map<string,Jugador*> ManejadorUsuario::getJugadores(){
-
-}
-
-bool ManejadorUsuario::existeJugador(string nickname ){
-    map<string, Jugador*> jugs = getJugadores();
-    map<string,Jugador*>::iterator it = jugs.find(nickname);    
-            return  (it != jugs.end());
-}
-*/
 
 
 ManejadorUsuario::~ManejadorUsuario(){}

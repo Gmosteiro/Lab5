@@ -4,12 +4,12 @@
     bool CUsuario::altaUsuario(){
 
         bool inserted = false;
-        if(nickname.empty()){
-            Jugador* j = new Jugador(email, pass, nickname, desc);
+        if(!(nickname.empty())){
+            Usuario* j = new Jugador(email, pass, nickname, desc);
             ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
             inserted = mu->agregarUsuario(j);
         }else{
-            Desarrollador* d = new Desarrollador(email, pass, nomEmp);
+            Usuario* d = new Desarrollador(email, pass, nomEmp);
             ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
             inserted = mu->agregarUsuario(d);
         }
@@ -27,32 +27,24 @@
         this->nickname=nickname;
         ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
             
-        map<string,Usuario*> auxj=mu->getUsuarios();
-        map<string,Jugador*> aux;
+        map<string,Usuario*> aux=mu->getUsuarios();
+        map<string,Jugador*> auxJ;
 
-        map<string,Usuario*>::iterator iter = auxj.begin();;
-
-        while(iter != auxj.end())
+        for(map<string,Usuario*>::iterator it = aux.begin(); it != aux.end(); it++)
         {
-            Jugador* jug = dynamic_cast<Jugador*>(&*iter);
+            Jugador* jug = dynamic_cast<Jugador*>(it->second);
                 if(jug != NULL)
-                    {                
-                        Jugador* P = new Jugador(jug->getEmail(), jug->getPass(),jug->getNick(),jug->getDesc());
-                        aux.insert({jug->getNick(),jug});
-                    }
+                { 
+                    Jugador* P = new Jugador(jug->getEmail(), jug->getPass(),jug->getNick(),jug->getDesc());
+                    auxJ.insert({P->getNick(),P});
+                }
+                //throw argument
         }
-        
-        
-            
-        
 
+        map<string,Jugador*>::iterator it = auxJ.find(nickname);    
+        return  it != auxJ.end();
 
-
-    return  NULL;
-
-        
-        
-    }
+}
     void CUsuario::cancelar(){}
  
     

@@ -41,6 +41,4 @@ bool ManejadorVideojuego::existeVideojuego(string nombre){
     return  (it != this->colVideojuegos.end());
 }
 
-
-
 ManejadorVideojuego::~ManejadorVideojuego(){}

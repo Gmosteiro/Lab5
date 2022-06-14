@@ -13,7 +13,7 @@ class ManejadorUsuario{
         map<string, Usuario*> colUsuarios;
     public:
         static ManejadorUsuario* getInstancia();
-        list<Usuario*> getUsuarios();
+        map<string,Usuario*> getUsuarios();
         Usuario* getUsuario(string);
         void removerUsuario(Usuario*);
         bool agregarUsuario(Usuario*);
