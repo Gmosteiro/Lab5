@@ -15,12 +15,9 @@ class CSesion:public ICSesion {
   public:
     void ingresaEmail(string email); 
     bool verificarPass(string pass); 
-    void iniciarSesion();
-    void cerrarSesion();
-
-
-
-
+    bool iniciarSesion();
+    bool cerrarSesion();
+    void cancelar();
 
  };
 

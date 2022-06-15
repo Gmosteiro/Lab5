@@ -13,6 +13,7 @@ class ICCategoria{
     public:
         virtual bool agregarCategoria()=0;
 
+        virtual map<string, DTCategoria*> listarCategorias() = 0;
         virtual void ingresarGenero(string genero) = 0;
         virtual void ingresarPlataforma(string plataforma) = 0;
         virtual void ingresarDesc(string desc) = 0;

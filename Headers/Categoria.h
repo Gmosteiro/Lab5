@@ -1,6 +1,7 @@
 #ifndef CATEGORIA
 #define CATEGORIA
 #include <string>
+#include "../Datatypes/DTCategoria.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
     void setPlataforma(string plataforma);
     string getDesc();
     void setDesc(string desc);
+    DTCategoria* getDTCategoria();
     ~Categoria();   
 };
 #endif

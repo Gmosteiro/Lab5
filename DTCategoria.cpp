@@ -1,21 +1,19 @@
 #include "./Datatypes/DTCategoria.h"
 
         DTCategoria::DTCategoria(){}
-        DTCategoria::DTCategoria(string genero, string plataforma){
-            this->genero = genero;
-            this->plataforma = plataforma;
+        DTCategoria::DTCategoria(string id){
+            this->id = id;
         }
-        string DTCategoria::getGenero(){
-            return this->genero;
+        string DTCategoria::getId(){
+            return this->id;
         }
-        void DTCategoria::setGenero(string genero){
-            this->genero=genero;
+        void DTCategoria::setId(string id){
+            this->id=id;
         }
-        string DTCategoria::getPlataforma(){
-            return this->plataforma;
-        }
-        void DTCategoria::setPlataforma(string plataforma){
-            this->plataforma = plataforma;
-        }
-
+        
         DTCategoria::~DTCategoria(){}
+
+        ostream& operator <<(ostream& salida, DTCategoria& dtc){
+            cout << "- " << dtc.id;
+        return salida;
+        }

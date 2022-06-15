@@ -14,7 +14,7 @@ class ManejadorCategoria{
         map<string, Categoria*> colCategorias;
     public:
         static ManejadorCategoria* getInstancia();
-        list<Categoria*> getCategorias();
+        map<string, Categoria*> getCategorias();
         Categoria* getCategoria(string);
         void removerCategoria(Categoria*);
         bool agregarCategoria(Categoria*);

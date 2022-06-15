@@ -17,4 +17,11 @@ void Sesion::setUser(Usuario* user){
     this->user = user;
 }
 
+bool Sesion::getEstado(){
+    return this->estado;
+}
+void Sesion::setEstado(bool estado){
+    this->estado = estado;
+}
+
 Sesion::~Sesion(){}

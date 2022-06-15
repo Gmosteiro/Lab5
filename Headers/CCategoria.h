@@ -12,6 +12,7 @@ class CCategoria: public ICCategoria{
     public:
         bool agregarCategoria();
 
+        map<string, DTCategoria*> listarCategorias();
         void ingresarGenero(string genero);
         void ingresarPlataforma(string plataforma);
         void ingresarDesc(string desc);

@@ -1,20 +1,21 @@
 #ifndef DTCATEGORIA
 #define DTCATEGORIA
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 class DTCategoria{
     private:
-        string genero, plataforma;
+        string id;
     public:
         DTCategoria();
-        DTCategoria(string genero, string plataforma);
-        string getGenero();
-        void setGenero(string genero);
-        string getPlataforma();
-        void setPlataforma(string plataforma);
+        DTCategoria(string id);
+        string getId();
+        void setId(string id);
         ~DTCategoria();
+
+        friend ostream& operator <<(ostream&,DTCategoria&);
 };
 
 #endif

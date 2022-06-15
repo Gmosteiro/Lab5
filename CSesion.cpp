@@ -7,21 +7,47 @@
     bool CSesion::verificarPass(string pass){
         this->pass=false;
         ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
-        this->pass= mu->getUsuario(email)->getPass().compare(pass); 
+        Usuario* u = mu->getUsuario(email);
+
+        if(u!=0)
+        {
+            if(u->getPass().compare(pass)==0)
+            {
+                this->pass=true;
+            }
+        }
         return this->pass;
-    } 
-    void CSesion::iniciarSesion(){
+    }
+
+    bool CSesion::iniciarSesion(){
         ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
         Sesion* ses = Sesion::getInstancia();
         if(mu->existeUsuario(email) && this->pass)
         {
-            ses->setUser(mu->getUsuario(this->email));    
+            ses->setUser(mu->getUsuario(this->email));
+            ses->setEstado(true);    
         }
+        else    
+        {
+            ses->setEstado(false);
+        }
+        return ses->getEstado();
     }
-    void CSesion::cerrarSesion(){
+
+    bool CSesion::cerrarSesion(){
+        
         Sesion* ses = Sesion::getInstancia();
-        ses->setUser(NULL);
+        bool retorno = false;
+
+        if(ses->getEstado()){
+            ses->setUser(NULL);
+            ses->setEstado(false);
+            retorno = true;
+        }
+        return retorno;
     }
+
+    void CSesion::cancelar(){}
 
 
 

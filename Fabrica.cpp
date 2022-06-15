@@ -3,6 +3,7 @@
 #include "./Headers/CCategoria.h"
 #include "./Headers/CUsuario.h"
 #include "./Headers/CVideojuego.h"
+#include "./Headers/CSesion.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
@@ -22,6 +23,9 @@ ICUsuario* Fabrica::getICUsuario(){
 }
 ICVideojuego* Fabrica::getICVideojuego(){
     return new CVideojuego();
+}
+ICSesion* Fabrica::getICSesion(){
+    return new CSesion();
 }
 
 Fabrica::~Fabrica(){}

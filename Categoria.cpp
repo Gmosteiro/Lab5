@@ -31,4 +31,8 @@
     void Categoria::setDesc(string desc){
         this->desc = desc;
     }
+    DTCategoria* Categoria::getDTCategoria(){
+        DTCategoria* dt = new DTCategoria(this->id);
+        return dt;
+    }
     Categoria::~Categoria(){}  

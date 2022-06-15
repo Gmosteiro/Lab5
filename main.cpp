@@ -5,6 +5,11 @@
 #include "./Headers/ICSesion.h"
 #include "./Headers/ICUsuario.h"
 #include "./Headers/ICVideojuego.h"
+#include "./Headers/Sesion.h"
+#include "./Headers/Usuario.h"
+#include "./Headers/Desarrollador.h"
+#include "./Headers/Jugador.h"
+
 
 
 
@@ -68,28 +73,10 @@ void menu() {
     cout << "OPCION: ";
 }
 
-
-//Iniciar sesión
-void menuIniciarSesion() {
-    cout << "----------------------------------------------" << endl;
-    cout << "________________Iniciar sesión________________" << endl;
-    cout << "----------------------------------------------" << endl;
-
-    cout << "->  Ahora la Contraseña: ";
-
-    cout << "---------------------------" << endl;
-    cout << "Se inicio sesión ANASHEY!" << endl;
-    cout << "---------------------------" << endl;
-
-
-    cout << "------------------------------------------" << endl;
-    cout << "Contraseña incorrecta o usuario no existe!" << endl;
-    cout << "------------------------------------------" << endl;
-}
-
 void menuAltaDeUsuario() {
     
     IContUsuario = Factorio->getICUsuario();
+    
     cout << "----------------------------------------------" << endl;
     cout << "______________Alta de usuario_________________" << endl;
     cout << "----------------------------------------------" << endl;
@@ -169,6 +156,139 @@ void menuAltaDeUsuario() {
     }    
 }
 
+//Iniciar sesión
+void menuIniciarSesion() {
+    string email, pass;
+    bool contra = false;
+    int opcion;
+    
+    IContSesion = Factorio->getICSesion();
+    Sesion* ses = Sesion::getInstancia();
+
+    if(ses->getEstado()){
+        cout << "----------------------------------------------" << endl;
+        cout << "----------Ya hay una sesion iniciada----------" << endl;
+        cout << "----------------------------------------------" << endl;
+        
+    }else{
+        
+        cout << "----------------------------------------------" << endl;
+        cout << "________________Iniciar sesión________________" << endl;
+        cout << "----------------------------------------------" << endl;
+        
+        
+        cout<< "Ingrese email: \n"<< endl;
+        leerString(email);
+        IContSesion->ingresaEmail(email);
+        cout<< "Ingrese contraseña: \n"<< endl;
+        leerString(pass);
+        contra = IContSesion->verificarPass(pass);
+
+        if(IContSesion->iniciarSesion())
+        {
+            cout << "------------------------------------------" << endl;
+            cout << "Sesion iniciada ANASHEY" << endl; //*GRITO EXCLAMANDO* 
+            cout << "------------------------------------------" << endl;
+            
+        }else
+        {
+            cout << "------------------------------------------" << endl;
+            cout << "Contraseña o usuario incorrecto anasheyn't!\n" << endl;//14/06/22
+            cout << "Reintentar(1), Cancelar(0)" << endl;
+            cout << "------------------------------------------" << endl;            
+            cin >> opcion;
+            if(opcion==0)
+            {
+                IContSesion->cancelar();
+            }else
+            {   
+                system("clear");             
+                menuIniciarSesion();
+            }
+        }        
+    }
+}
+
+void menuCerrarSesion() {
+
+    IContSesion = Factorio->getICSesion();
+
+    if(IContSesion->cerrarSesion()){
+        cout << "----------------------------------------------" << endl;
+        cout << "________________Sesión cerrada________________" << endl;
+        cout << "----------------------------------------------" << endl;   
+    }else{ 
+        cout << "----------------------------------------------" << endl;
+        cout << "----------No hay una sesión iniciada----------" << endl;
+        cout << "----------------------------------------------" << endl;    
+    }
+
+}
+
+void menuAgregarCategoria() {
+
+    IContCategoria = Factorio->getICCategoria();
+    Sesion* ses = Sesion::getInstancia();
+    string genero,desc,plataforma;
+    
+
+    map<string, DTCategoria*> categorias;
+
+    Desarrollador* des = dynamic_cast<Desarrollador*>(ses->getUser());
+    if(des==NULL){
+        cout << "----------------------------------------------" << endl;
+        cout << "----------El usuario no es desarrollador----------" << endl;
+        cout << "----------------------------------------------" << endl;    
+    }else{
+
+        categorias = IContCategoria->listarCategorias();
+
+        for(map<string,DTCategoria*>::iterator it = categorias.begin(); it != categorias.end(); it++){
+            cout << *(it->second) << "\n" << endl;
+        }
+    
+        cout<< "Ingrese genero: \n"<< endl;
+        leerString(genero);
+        cout<< "Ingrese plataforma: \n"<< endl;
+        leerString(plataforma);
+        cout<< "Ingrese descripcion: \n"<< endl;
+        leerString(desc);
+
+        IContCategoria->ingresarGenero(genero);
+        IContCategoria->ingresarPlataforma(plataforma);
+        IContCategoria->ingresarDesc(desc);
+
+        int caso;
+        cout << "Acepta(1) o Rechaza(0)?\n";
+        cin >> caso;
+        
+        if(caso == 1)
+        {
+            if(IContCategoria->agregarCategoria())
+            {
+                system("clear");
+                cout <<"Categoria ingresada\n" << endl; 
+            }
+            else
+            {
+                system("clear");
+                cout <<"Ya existe esa categoria, operacion cancelada\n" << endl; 
+            }       
+        }
+        else
+        {
+            system("clear"); 
+            cout << "Operacion cancelada\n" << endl;   
+            IContUsuario->cancelar();
+        }
+
+
+
+    }
+            
+
+}
+
 int main() {
 
     //DEJAR AFUERA DEL WHILE
@@ -193,14 +313,17 @@ int main() {
                 break;
             case 2:
                 system("clear");
+                menuIniciarSesion();
          
                 break;
             case 3:
                 system("clear");
+                menuCerrarSesion();
         
                 break;
             case 4:
                 system("clear");
+                menuAgregarCategoria();
             
                 break;
             case 5:

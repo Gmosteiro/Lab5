@@ -10,10 +10,13 @@ class Sesion{
         static Sesion* instancia;
         Sesion();
         Usuario* user;
+        bool estado;
     public:
         static Sesion* getInstancia();
         Usuario* getUser();
         void setUser(Usuario* user);
+        bool getEstado();
+        void setEstado(bool estado);
         ~Sesion();
 };
 #endif
