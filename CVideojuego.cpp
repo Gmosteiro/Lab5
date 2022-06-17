@@ -6,11 +6,11 @@
     void CVideojuego::eliminarVideojuego(){
 
     }
-    void CVideojuego::agregarVideojuego(){
+    bool CVideojuego::agregarVideojuego(){
         Sesion* s = Sesion::getInstancia();
         ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
         Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat);
-        mv->agregarVideojuego(v);
+        return mv->agregarVideojuego(v);
     }
     void CVideojuego::iniciarPartida(){}
     //CUNFUSED UNGA BUNGA 
@@ -40,10 +40,11 @@
         bool salida = false;
         ManejadorCategoria* mc = ManejadorCategoria::getInstancia();
         Categoria* cat;
-            if(mc->existeCategoria(id)){
+            if(mc->existeCategoria(id) && !(this->cat.count(id))){
                 cat=mc->getCategoria(id);
                 this->cat.insert({id,cat});
                 salida = true;
             }
         return salida;
     }
+    void CVideojuego::cancelar(){}

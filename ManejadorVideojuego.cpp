@@ -32,8 +32,12 @@ void ManejadorVideojuego::removerVideojuego(Videojuego* game){
 }
 
 bool ManejadorVideojuego::agregarVideojuego(Videojuego* game){
-    this->colVideojuegos.insert({game->getNombre(), game});
-    return existeVideojuego(game->getNombre());
+    bool salida = false;
+    if(!existeVideojuego(game->getNombre())){
+        this->colVideojuegos.insert({game->getNombre(), game});
+        salida = true;
+    } 
+    return salida;
 }
 
 bool ManejadorVideojuego::existeVideojuego(string nombre){

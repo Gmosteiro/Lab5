@@ -13,7 +13,7 @@ class ICVideojuego{
     public:
         virtual void verInformacionVideojuego()=0;
         virtual void eliminarVideojuego()=0;
-        virtual void agregarVideojuego()=0;
+        virtual bool agregarVideojuego()=0;
         virtual void iniciarPartida()=0;
 
         virtual void ingresarNombre(string nombre) = 0;
@@ -24,6 +24,7 @@ class ICVideojuego{
         virtual void ingresarContinua(bool continua) = 0;
         virtual void ingresarTrasmitido (bool transmitido)=0;
         virtual bool ingresarCategoria (string id)=0;
+        virtual void cancelar ()=0;
         
 };
 

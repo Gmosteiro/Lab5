@@ -225,17 +225,25 @@ void menuCerrarSesion() {
 
 }
 
+bool esDesarrollador(){
+    Sesion* ses = Sesion::getInstancia();
+    Desarrollador* des = dynamic_cast<Desarrollador*>(ses->getUser());
+    return des!=NULL;
+}
+
+bool esJugador(){
+    Sesion* ses = Sesion::getInstancia();
+    Jugador* jug = dynamic_cast<Jugador*>(ses->getUser());
+    return jug!=NULL;
+}
+
 void menuAgregarCategoria() {
 
     IContCategoria = Factorio->getICCategoria();
-    Sesion* ses = Sesion::getInstancia();
     string genero,desc,plataforma;
-    
-
     map<string, DTCategoria*> categorias;
 
-    Desarrollador* des = dynamic_cast<Desarrollador*>(ses->getUser());
-    if(des==NULL){
+    if(!esDesarrollador()){
         cout << "----------------------------------------------" << endl;
         cout << "----------El usuario no es desarrollador----------" << endl;
         cout << "----------------------------------------------" << endl;    
@@ -281,13 +289,127 @@ void menuAgregarCategoria() {
             cout << "Operacion cancelada\n" << endl;   
             IContUsuario->cancelar();
         }
-
-
-
     }
+}
+
+void menuAgregarVideojuego() {
+
+    IContVideojuego = Factorio->getICVideojuego();
+    IContCategoria = Factorio->getICCategoria();
+    
+    Sesion* ses = Sesion::getInstancia();
+
+    map<string, DTCategoria*> dtcat;
+    map<string, DTCategoria*> dtcatag;
+    
+    if(!esDesarrollador()){
+        cout << "----------------------------------------------" << endl;
+        cout << "----------El usuario no es desarrollador----------" << endl;
+        cout << "----------------------------------------------" << endl;    
+    }else{
+
+        dtcat = IContCategoria->listarCategorias();
+
+        if(dtcat.empty()){
+            system("clear");
+            cout << "-------------------------------------------------------" << endl;
+            cout << "----------No existen categorias en el sistema----------" << endl;//Hoy es  16/06/22
+            cout << "-------------------------------------------------------" << endl;    
+        }else{
+            //xd
+            string nombre, descripcion, id_cat;
+            int costo;
+
+            system("clear");
+            cout<< "Ingrese Nombre del Videojuego: \n"<< endl;
+            leerString(nombre);
+            cout<< "Ingrese descripcion: \n"<< endl;
+            leerString(descripcion);
+            cout<< "Costo: \n"<< endl;
+            cin >> costo;
+
+            IContVideojuego->ingresarNombre(nombre);
+            IContVideojuego->ingresarDescripcion(descripcion);
+            IContVideojuego->ingresarCosto(costo);
+
             
+            int stop = 1;
+            while (stop!=0){
+                    cout << "----------------------------------------------" << endl;
+                    cout << "------------Categorias del sistema------------" << endl;
+                    cout << "----------------------------------------------" << endl;   
+
+                    for(map<string,DTCategoria*>::iterator it = dtcat.begin(); it != dtcat.end(); it++){
+                        cout << *(it->second) << "\n" << endl;
+                    }
+                        
+                    cout<< "Seleccione la categoria: \n"<< endl;
+                    leerString(id_cat);
+
+                if(IContVideojuego->ingresarCategoria(id_cat)){
+
+                    DTCategoria* dta = new DTCategoria(id_cat);
+                    dtcatag.insert({id_cat, dta});
+                    
+                    system("clear");
+                    cout << "----------------------------------------------" << endl;
+                    cout << "--------------Categoria agregada--------------" << endl;
+                    cout << "----------------------------------------------\n" << endl;   
+
+                    cout<< "Quiere ingresar otra categoria? \n"<< endl;
+                    cout<< " Si(1) No(0)  \n"<< endl;
+                    cin >> stop;    
+                }else{
+                    system("clear");
+                    cout << "---------------------------------------------------" << endl;
+                    cout << "-----No existe la categoria, o ya fue agregada-----" << endl;
+                    cout << "---------------------------------------------------\n" << endl;
+
+                    cout<< "Quiere ingresar otra categoria? \n"<< endl;
+                    cout<< " Si(1) No(0)  \n"<< endl;
+                    cin >> stop;
+                }
+            }
+
+            cout << "---------------------------------------------" << endl;
+            cout << "----------Informacion de videojuego----------" << endl;
+            cout << "---------------------------------------------\n" << endl;   
+
+            cout << "Nombre: " << nombre << "\n" << endl;
+            cout << "Descripcion: " << descripcion << "\n" << endl;
+            cout << "Costo: " << costo << "\n" << endl;
+            cout << "Email de desarrolador: " << ses->getUser()->getEmail() << "\n" << endl;
+            cout << "Categorias: " << "\n" << endl;
+            
+            for(map<string,DTCategoria*>::iterator it = dtcatag.begin(); it != dtcatag.end(); it++){
+                        cout << *(it->second) << "\n" << endl;
+            }
+            cout<< "Acepta la creacion del videojuego? \n"<< endl;
+            cout<< "Si(1) No(0)  \n"<< endl;
+            cin >> stop; 
+            if(stop==0){
+                IContVideojuego->cancelar();
+            }else{
+                if(IContVideojuego->agregarVideojuego()){
+                    system("clear");
+                    cout << "---------------------------------------------" << endl;
+                    cout << "------Videojuego agregado correctamente------" << endl;
+                    cout << "---------------------------------------------\n" << endl;  
+                    
+                }else{
+                    system("clear");
+                    cout << "--------------------------------------------------------" << endl;
+                    cout << "--------- No se puedo agregar el videojuego :c ---------" << endl;
+                    cout << "--------------------------------------------------------\n" << endl;   
+                }
+           }
+      }
+    }
+
+
 
 }
+
 
 int main() {
 
@@ -328,6 +450,7 @@ int main() {
                 break;
             case 5:
                 system("clear");
+                menuAgregarVideojuego();
               
                 break;
             case 6:

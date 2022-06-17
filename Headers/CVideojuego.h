@@ -17,7 +17,7 @@ class CVideojuego: public ICVideojuego{
     public:
         void verInformacionVideojuego();
         void eliminarVideojuego();
-        void agregarVideojuego();
+        bool agregarVideojuego();
         void iniciarPartida();
         
 
@@ -29,6 +29,7 @@ class CVideojuego: public ICVideojuego{
         void ingresarContinua(bool continua);
         void ingresarTrasmitido (bool transmitido);
         bool ingresarCategoria (string id);
+        void cancelar();
 };
 
 #endif
