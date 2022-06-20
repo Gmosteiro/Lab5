@@ -4,6 +4,10 @@
         "tuple": "cpp",
         "utility": "cpp",
         "map": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "iostream": "cpp",
+        "string": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }

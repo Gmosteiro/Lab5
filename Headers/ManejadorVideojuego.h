@@ -14,7 +14,7 @@ class ManejadorVideojuego{
         map<string, Videojuego*> colVideojuegos;
     public:
         static ManejadorVideojuego* getInstancia();
-        list<Videojuego*> getVideojuegos();
+        map<string, Videojuego*> getVideojuegos();
         Videojuego* getVideojuego(string);
         void removerVideojuego(Videojuego*);
         bool agregarVideojuego(Videojuego*);

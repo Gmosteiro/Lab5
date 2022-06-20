@@ -5,6 +5,7 @@
 #include "ICUsuario.h"
 #include "ICVideojuego.h"
 #include "ICSesion.h"
+#include "ICSuscripcion.h"
 
 class Fabrica {
   private:
@@ -16,6 +17,7 @@ class Fabrica {
     ICUsuario* getICUsuario();
     ICVideojuego* getICVideojuego();
     ICSesion* getICSesion();
+    ICSuscripcion* getICSuscripcion();
     
     ~Fabrica();
 };

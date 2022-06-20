@@ -9,7 +9,8 @@
     bool CVideojuego::agregarVideojuego(){
         Sesion* s = Sesion::getInstancia();
         ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
-        Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat);
+        map<string, Suscripcion*> sus;
+        Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat, sus);
         return mv->agregarVideojuego(v);
     }
     void CVideojuego::iniciarPartida(){}

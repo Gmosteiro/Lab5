@@ -4,6 +4,7 @@
 #include "./Headers/CUsuario.h"
 #include "./Headers/CVideojuego.h"
 #include "./Headers/CSesion.h"
+#include "./Headers/CSuscripcion.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
@@ -26,6 +27,10 @@ ICVideojuego* Fabrica::getICVideojuego(){
 }
 ICSesion* Fabrica::getICSesion(){
     return new CSesion();
+}
+
+ICSuscripcion* Fabrica::getICSuscripcion(){
+  return new CSuscripcion();
 }
 
 Fabrica::~Fabrica(){}

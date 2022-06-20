@@ -10,10 +10,10 @@ ManejadorVideojuego*  ManejadorVideojuego::getInstancia(){
     return instancia;
 }
 
-list<Videojuego*> ManejadorVideojuego::getVideojuegos(){
-    list<Videojuego*> aux;
+map<string, Videojuego*> ManejadorVideojuego::getVideojuegos(){
+    map<string, Videojuego*> aux;
     for(map<string,Videojuego*>::iterator it = this->colVideojuegos.begin(); it != this->colVideojuegos.end(); it++)
-        aux.push_back(it->second);
+        aux.insert({it->first,it->second});
     return aux;
 }
 

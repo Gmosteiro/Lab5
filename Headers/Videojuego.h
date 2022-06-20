@@ -4,6 +4,7 @@
 #include <map>
 #include "Usuario.h"
 #include "Categoria.h"
+#include "Suscripcion.h"
 
 using namespace std;
 
@@ -13,10 +14,11 @@ private:
     int costo, totalHoras;
     Usuario* desarrollador;
     map<string,Categoria*> categorias;
+    map<string,Suscripcion*> suscripciones;
 
 public:
     Videojuego();
-    Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<string,Categoria*> categorias);
+    Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones);
     string getNombre();
     void setNombre(string nombre);
     string getDesc();
@@ -29,6 +31,8 @@ public:
     void setDesarrollador(Usuario* desarrollador);
     map<string,Categoria*> getCategorias();
     void setCategorias(map<string,Categoria*> categorias);
+    map<string,Suscripcion*> getSuscripciones();
+    void setSuscripciones(map<string,Suscripcion*> suscripciones);
     ~Videojuego();   
 };
 #endif

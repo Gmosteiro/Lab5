@@ -42,6 +42,8 @@ ICCategoria *IContCategoria;
 ICSesion *IContSesion;
 ICVideojuego *IContVideojuego;
 ICUsuario *IContUsuario;
+ICSuscripcion *IContSuscripcion;
+
 
 void leerString(string &aux){
         cin >>ws;
@@ -353,7 +355,7 @@ void menuAgregarVideojuego() {
                     
                     system("clear");
                     cout << "----------------------------------------------" << endl;
-                    cout << "--------------Categoria agregada--------------" << endl;
+                    cout << "--------------Categoria agregada--------------" << endl;  // que si =)
                     cout << "----------------------------------------------\n" << endl;   
 
                     cout<< "Quiere ingresar otra categoria? \n"<< endl;
@@ -410,6 +412,79 @@ void menuAgregarVideojuego() {
 
 }
 
+void menuSuscribirseVideojuego(){
+
+        Sesion* ses = Sesion::getInstancia();
+        IContSuscripcion = Factorio->getICSuscripcion();
+        map<string, DTSuscripcion*> restoSus;
+        map<string, DTSuscripcion*> jugSus;
+        string nombre;
+        int t;
+        TipoPago tipo;
+
+        if(!esJugador()){
+            cout << "----------------------------------------------" << endl;
+            cout << "----------El usuario no es jugador----------" << endl;
+            cout << "----------------------------------------------" << endl;    
+        }else{
+
+            jugSus = IContSuscripcion->listarSuscripcionesJugador();
+            restoSus = IContSuscripcion->listarRestoSuscripciones();
+
+            if(restoSus.empty()){
+                system("clear");
+                cout << "--------------------------------------------------------------------" << endl;
+                cout << "----------No existen videojuegos o ya se suscribió a todos----------" << endl;
+                cout << "--------------------------------------------------------------------" << endl;    
+            }else{
+
+                system("clear");
+                cout << "-------------------------------------------------------" << endl;
+                cout << "---------------- Suscribirse a videojugo --------------" << endl;
+                cout << "-------------------------------------------------------\n" << endl; //debe haber un videojuego
+                
+                cout << "---------------- Suscripciones activas ----------------\n" << endl;
+
+                for(map<string,DTSuscripcion*>::iterator it = jugSus.begin(); it != jugSus.end(); it++){
+                    cout << *(it->second) << "\n" << endl;
+                }
+        
+                cout << "---------------- Videojuegos sin suscripcion ----------------\n" << endl;
+
+                for(map<string,DTSuscripcion*>::iterator it = restoSus.begin(); it != restoSus.end(); it++){
+                    cout << *(it->second) << "\n" << endl;
+                }
+
+                cout<< "Seleccione el videojuego: \n"<< endl;
+                leerString(nombre);
+
+                while(!IContSuscripcion->nombreVideojuego(nombre)){
+                    cout<< "Ingrese un nombre correcto: \n"<< endl;
+                    leerString(nombre);
+                }
+
+                cout<< "Seleccione el metodo de pago (DEBITO (0) o CREDITO (1)): \n"<< endl; //VICHAR CON EL LAB VIEJO
+                cin >> t;
+
+                switch (t)
+                {
+                case 0:
+                    tipo = DEBITO;
+                    break;
+                
+                case 1:
+                    tipo = CREDITO;
+                    break;
+                }
+
+            }
+
+        }
+                    
+
+
+}
+
 
 int main() {
 
@@ -455,6 +530,7 @@ int main() {
                 break;
             case 6:
                 system("clear");
+                menuSuscribirseVideojuego();
               
                 break;
             case 7:
