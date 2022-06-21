@@ -1,14 +1,27 @@
 #include "./Headers/CSuscripcion.h"
 
-bool CSuscripcion::suscribirseAVideojuego(){
-    return false;
-}
+
+void CSuscripcion::suscribirseAVideojuego(){
+    
+    ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+    Sesion* s = Sesion::getInstancia();
+
+    Videojuego* vid = mv->getVideojuego(this->nombre);
+
+    time_t t = time(NULL);
+	tm* timePtr = localtime(&t);    
+    DTFechaHora *fecha = new DTFechaHora(timePtr->tm_mday, (timePtr->tm_mon+1), (timePtr->tm_year+1900), timePtr->tm_hour, timePtr->tm_min);
+
+    Suscripcion* sus = new Suscripcion(*fecha, this->tipo, s->getUser());
+
+    vid->setSuscripciones(s->getUser()->getEmail(),sus);
+    }
         
-map<string, DTSuscripcion*> CSuscripcion::listarSuscripcionesJugador(){
+map<string, Videojuego*> CSuscripcion::listarSuscripcionesJugador(){
 
     Sesion* s = Sesion::getInstancia();
     ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
-    map<string, DTSuscripcion*> dtSusJ;
+    map<string, Videojuego*> vidSusJ;
     map<string, Videojuego*> aux = mv->getVideojuegos();
 
     for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){
@@ -17,30 +30,28 @@ map<string, DTSuscripcion*> CSuscripcion::listarSuscripcionesJugador(){
 
     map<string,Suscripcion*>::iterator its = susJ.find(s->getUser()->getEmail());
         if (its != susJ.end()){
-        DTSuscripcion* sus = new DTSuscripcion(it->second->getNombre(), it->second->getCosto());
-        dtSusJ.insert({sus->getNombre(), sus});
-    }
+        vidSusJ.insert({it->first, it->second});
+        }
 
     }
 
-    return dtSusJ;
+    return vidSusJ;
 
 }
-map<string, DTSuscripcion*> CSuscripcion::listarRestoSuscripciones(){
+map<string, Videojuego*> CSuscripcion::listarRestoSuscripciones(){
 
     ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
 
-    map<string, DTSuscripcion*> susJug = listarSuscripcionesJugador();
-    map<string, DTSuscripcion*> restoSus;
+    map<string, Videojuego*> susJug = listarSuscripcionesJugador();
+    map<string, Videojuego*> restoSus;
     map<string, Videojuego*> aux = mv->getVideojuegos();
 
     for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){
 
-        map<string,DTSuscripcion*>::iterator its = susJug.find(it->first);
+        map<string,Videojuego*>::iterator its = susJug.find(it->first);
         if (its == susJug.end()){
 
-            DTSuscripcion* sus = new DTSuscripcion(it->second->getNombre(), it->second->getCosto());
-            restoSus.insert({sus->getNombre(), sus});
+            restoSus.insert({it->first, it->second});
 
         }
 
@@ -53,14 +64,15 @@ bool CSuscripcion::nombreVideojuego(string nombre){
 
     bool salida = false;
 
-    map<string, DTSuscripcion*> susJug = listarSuscripcionesJugador();
-    map<string, DTSuscripcion*> restoSus = listarRestoSuscripciones();
+    map<string, Videojuego*> susJug = listarSuscripcionesJugador();
+    map<string, Videojuego*> restoSus = listarRestoSuscripciones();
 
-    map<string,DTSuscripcion*>::iterator it = susJug.find(nombre);
+    map<string,Videojuego*>::iterator it = susJug.find(nombre);
         if (it == susJug.end()){
 
-            map<string,DTSuscripcion*>::iterator its = restoSus.find(nombre);
-            if (it != susJug.end()){
+            map<string,Videojuego*>::iterator its = restoSus.find(nombre);
+            if (its != restoSus.end()){
+                this->nombre=nombre;
                 salida = true;
             }
             
@@ -69,7 +81,7 @@ bool CSuscripcion::nombreVideojuego(string nombre){
 
 }
 void CSuscripcion::tipoPago(TipoPago tipo){
-
+    this->tipo = tipo;
 }
 void CSuscripcion::cancelar(){
 

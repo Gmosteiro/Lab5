@@ -49,8 +49,8 @@
     map<string,Suscripcion*> Videojuego::getSuscripciones(){
         return this->suscripciones;
     }
-    void Videojuego::setSuscripciones(map<string,Suscripcion*> suscripciones){
-        this->suscripciones = suscripciones;
+    void Videojuego::setSuscripciones(string id, Suscripcion* sus){
+        this->suscripciones.insert({id, sus});
     }
 
     Videojuego::~Videojuego(){}   

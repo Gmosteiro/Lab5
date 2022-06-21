@@ -1,7 +1,7 @@
 #include "./Headers/Suscripcion.h"
 
     Suscripcion::Suscripcion(){}
-    Suscripcion::Suscripcion(DTFechaHora fechaHora, TipoPago tipo, Jugador* jugador){
+    Suscripcion::Suscripcion(DTFechaHora fechaHora, TipoPago tipo, Usuario* jugador){
         this->fechaHora = fechaHora;
         this->tipo = tipo;
         this->jugador = jugador;
@@ -18,10 +18,10 @@
     void Suscripcion::setTipoPago(TipoPago tipo){
         this->tipo = tipo;
     }
-    Jugador* Suscripcion::getJugador(){
+    Usuario* Suscripcion::getJugador(){
         return this->jugador;
     }
-    void Suscripcion::setJugador(Jugador* jugador){
+    void Suscripcion::setJugador(Usuario* jugador){
         this->jugador = jugador;
     }
 

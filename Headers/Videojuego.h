@@ -32,7 +32,7 @@ public:
     map<string,Categoria*> getCategorias();
     void setCategorias(map<string,Categoria*> categorias);
     map<string,Suscripcion*> getSuscripciones();
-    void setSuscripciones(map<string,Suscripcion*> suscripciones);
+    void setSuscripciones(string id, Suscripcion* sus);
     ~Videojuego();   
 };
 #endif

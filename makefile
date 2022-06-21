@@ -1,5 +1,5 @@
-main: Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o Desarrollador.o DTCategoria.o DTFechaHora.o DTSuscripcion.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o
-	g++ Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o Desarrollador.o DTCategoria.o DTFechaHora.o DTSuscripcion.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o -g -o sistema
+main: Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o Desarrollador.o DTCategoria.o DTFechaHora.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o
+	g++ Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o Desarrollador.o DTCategoria.o DTFechaHora.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o -g -o sistema
 
 Categoria.o: Categoria.cpp
 	g++ -g -c Categoria.cpp
@@ -27,9 +27,6 @@ DTCategoria.o: DTCategoria.cpp
 
 DTFechaHora.o: DTFechaHora.cpp
 	g++ -g -c DTFechaHora.cpp
-
-DTSuscripcion.o: DTSuscripcion.cpp
-	g++ -g -c DTSuscripcion.cpp
 
 Fabrica.o: Fabrica.cpp
 	g++ -g -c Fabrica.cpp

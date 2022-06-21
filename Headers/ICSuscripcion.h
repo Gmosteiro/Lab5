@@ -1,8 +1,8 @@
 #ifndef ICSUSCRIPCION
 #define ICSUSCRIPCION
 
-#include "../Datatypes/DTSuscripcion.h"
 #include "TipoPago.h"
+#include "Videojuego.h"
 #include <string>
 #include <map>
 
@@ -12,10 +12,10 @@ class ICSuscripcion{
         
     public:
     
-        virtual bool suscribirseAVideojuego()=0;
+        virtual void suscribirseAVideojuego()=0;
         
-        virtual map<string, DTSuscripcion*> listarSuscripcionesJugador() = 0;
-        virtual map<string, DTSuscripcion*> listarRestoSuscripciones() = 0;
+        virtual map<string, Videojuego*> listarSuscripcionesJugador() = 0;
+        virtual map<string, Videojuego*> listarRestoSuscripciones() = 0;
 
         virtual bool nombreVideojuego(string nombre) = 0;
         virtual void tipoPago(TipoPago tipo) = 0;

@@ -1,22 +1,25 @@
 #ifndef CSUSCRIPCION
 #define CSUSCRIPCION
 
-#include "ICSuscripcion.h"
 #include "Sesion.h"
 #include "ManejadorVideojuego.h"
+#include "ICSuscripcion.h"
+
+#include <ctime>
 
 using namespace std;
 
 class CSuscripcion: public ICSuscripcion{
+
     private:
     string nombre;
     TipoPago tipo;
     public:
     
-    bool suscribirseAVideojuego();
+    void suscribirseAVideojuego();
     
-    map<string, DTSuscripcion*> listarSuscripcionesJugador();
-    map<string, DTSuscripcion*> listarRestoSuscripciones();
+    map<string, Videojuego*> listarSuscripcionesJugador();
+    map<string, Videojuego*> listarRestoSuscripciones();
 
     bool nombreVideojuego(string nombre);
     void tipoPago(TipoPago tipo);

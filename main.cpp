@@ -9,6 +9,7 @@
 #include "./Headers/Usuario.h"
 #include "./Headers/Desarrollador.h"
 #include "./Headers/Jugador.h"
+#include "./Headers/Videojuego.h"
 
 
 
@@ -416,8 +417,8 @@ void menuSuscribirseVideojuego(){
 
         Sesion* ses = Sesion::getInstancia();
         IContSuscripcion = Factorio->getICSuscripcion();
-        map<string, DTSuscripcion*> restoSus;
-        map<string, DTSuscripcion*> jugSus;
+        map<string, Videojuego*> restoSus;
+        map<string, Videojuego*> jugSus;
         string nombre;
         int t;
         TipoPago tipo;
@@ -445,14 +446,14 @@ void menuSuscribirseVideojuego(){
                 
                 cout << "---------------- Suscripciones activas ----------------\n" << endl;
 
-                for(map<string,DTSuscripcion*>::iterator it = jugSus.begin(); it != jugSus.end(); it++){
-                    cout << *(it->second) << "\n" << endl;
+                for(map<string,Videojuego*>::iterator it = jugSus.begin(); it != jugSus.end(); it++){
+                    cout << "   Nombre: " << it->second->getNombre() << " - Costo: " << it->second->getCosto() << "\n" << endl;
                 }
         
                 cout << "---------------- Videojuegos sin suscripcion ----------------\n" << endl;
 
-                for(map<string,DTSuscripcion*>::iterator it = restoSus.begin(); it != restoSus.end(); it++){
-                    cout << *(it->second) << "\n" << endl;
+                for(map<string,Videojuego*>::iterator it = restoSus.begin(); it != restoSus.end(); it++){
+                    cout << "   Nombre: " << it->second->getNombre() << " - Costo: " << it->second->getCosto() << "\n" << endl;
                 }
 
                 cout<< "Seleccione el videojuego: \n"<< endl;
@@ -477,11 +478,82 @@ void menuSuscribirseVideojuego(){
                     break;
                 }
 
+                IContSuscripcion->tipoPago(tipo);
+
+                cout<< "Estimado Jugador desea confirmar la suscripcion anashey? \n"<< endl;
+                cout<< "Si(1) No(0)  \n"<< endl;
+                int opcion = 0;
+                cin >> opcion; 
+                if(opcion==0){
+                    IContSuscripcion->cancelar();
+                }else{
+
+                    IContSuscripcion->suscribirseAVideojuego();
+                    system("clear");
+                    cout << "-------------------------------------------------" << endl;
+                    cout << "------Suscrito a videojuego de forma anashe------" << endl;
+                    cout << "-------------------------------------------------\n" << endl;        
+                } 
+                    
+                }
+
             }
 
         }
-                    
 
+void datosPrueba() {
+
+    IContUsuario = Factorio->getICUsuario();
+
+    IContUsuario->datosComunes("des","des");
+    IContUsuario->datosEmpresa("empresa");
+    IContUsuario->altaUsuario();
+
+    IContUsuario = Factorio->getICUsuario();
+
+    IContUsuario->datosComunes("jug", "jug");
+    IContUsuario->datosJugador("jug", "jug");
+
+    IContUsuario->altaUsuario();
+
+    IContCategoria = Factorio->getICCategoria();
+
+    IContCategoria->ingresarGenero("Futbol");
+    IContCategoria->ingresarPlataforma("PC");
+    IContCategoria->ingresarDesc("Pelotita go brr");
+    IContCategoria->agregarCategoria();
+    
+    IContCategoria = Factorio->getICCategoria();
+
+    IContCategoria->ingresarGenero("Tiros");
+    IContCategoria->ingresarPlataforma("Play");
+    IContCategoria->ingresarDesc("Piu piu");
+    IContCategoria->agregarCategoria();
+
+    IContVideojuego = Factorio->getICVideojuego();
+    IContSesion = Factorio->getICSesion();
+    
+    IContSesion->ingresaEmail("des");
+    IContSesion->verificarPass("des");
+    IContSesion->iniciarSesion();
+
+    IContVideojuego->ingresarNombre("FIFA");
+    IContVideojuego->ingresarDescripcion("FURBO");
+    IContVideojuego->ingresarCosto(1200);
+    IContVideojuego->ingresarCategoria("FUTBOL_PC");
+    IContVideojuego->agregarVideojuego();
+
+    IContVideojuego = Factorio->getICVideojuego();
+
+    IContVideojuego->ingresarNombre("COD");
+    IContVideojuego->ingresarDescripcion("TIRITO");
+    IContVideojuego->ingresarCosto(2400);
+    IContVideojuego->ingresarCategoria("TIROS_PLAY");
+    IContVideojuego->agregarVideojuego();
+
+    IContSesion->cerrarSesion();
+
+    cout<< "Se cargo todo anashe\n"<< endl;
 
 }
 
@@ -567,6 +639,8 @@ int main() {
                 break;
             case 15:
                 system("clear");
+                datosPrueba();
+                
               
                 break;
                 
@@ -578,7 +652,7 @@ int main() {
             cin.clear();
             cin >> opcion;
               }
-       cout << "\033[0;31mS̷͉͐ė̷͔ǵ̷̭m̶̠̚e̶͍̍n̷̙͋t̵͓͊á̸̫t̵̨̓i̸̊͜o̵͔̽ṉ̴͐ ̸̮̑F̸͖̈́a̴̧̽u̷͉̓l̷̼̋t̸̰͗ ̸̦̃(̶̝͝C̴̳͊o̸̝̔r̵̘̍e̵̘͝ ̷̨͊D̶͖͘ų̸͆m̸̺̌p̵̩̃ȅ̴͇d̸̘̃)̴̡̃ \033[0;31m\n" << endl; //debadelai
+       cout << "\033[0;31mS̷͉͐ė̷͔ǵ̷̭m̶̠̚e̶͍̍n̷̙͋t̵͓͊á̸̫t̵̨̓i̸̊͜o̵͔̽ṉ̴͐ ̸̮̑F̸͖̈́a̴̧̽u̷͉̓l̷̼̋t̸̰͗ ̸̦̃(̶̝͝C̴̳͊o̸̝̔r̵̘̍e̵̘͝ ̷̨͊D̶͖͘ų̸͆m̸̺̌p̵̩̃ȅ̴͇d̸̘̃)̴̡̃ \033[0;31m\n" << endl; //debadelai xSanPrax pa los gamers
     }
     catch (const std::exception& e)
     {
