@@ -6,6 +6,7 @@
 #include "ICVideojuego.h"
 #include "ICSesion.h"
 #include "ICSuscripcion.h"
+#include "ICPartida.h"
 
 class Fabrica {
   private:
@@ -18,6 +19,7 @@ class Fabrica {
     ICVideojuego* getICVideojuego();
     ICSesion* getICSesion();
     ICSuscripcion* getICSuscripcion();
+    ICPartida* getICPartida();
     
     ~Fabrica();
 };

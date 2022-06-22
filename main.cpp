@@ -5,14 +5,12 @@
 #include "./Headers/ICSesion.h"
 #include "./Headers/ICUsuario.h"
 #include "./Headers/ICVideojuego.h"
+#include "./Headers/ICPartida.h"
 #include "./Headers/Sesion.h"
 #include "./Headers/Usuario.h"
 #include "./Headers/Desarrollador.h"
 #include "./Headers/Jugador.h"
 #include "./Headers/Videojuego.h"
-
-
-
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -44,7 +42,7 @@ ICSesion *IContSesion;
 ICVideojuego *IContVideojuego;
 ICUsuario *IContUsuario;
 ICSuscripcion *IContSuscripcion;
-
+ICPartida *IContPartida;
 
 void leerString(string &aux){
         cin >>ws;
@@ -557,6 +555,101 @@ void datosPrueba() {
 
 }
 
+void menuIniciarPartida(){
+
+    string juego;
+    int tipo, duracion, conf, cantParticipantes, opcion;
+    bool continua, enVivo;
+    Videojuego* videojuego;
+    map<string,Videojuego*> juegosU;
+
+    IContSuscripcion = Factorio->getICSuscripcion();
+    IContVideojuego = Factorio->getICVideojuego();
+    IContPartida = Factorio->getICPartida();
+
+    if(!esJugador()){
+            cout << "----------------------------------------------" << endl;
+            cout << "----------El usuario no es jugador----------" << endl;
+            cout << "----------------------------------------------" << endl;    
+        }else{
+            juegosU = IContSuscripcion->listarSuscripcionesJugador();
+            if(juegosU.empty()){
+                system("clear");
+                cout << "--------------------------------------------------------------------" << endl;
+                cout << "---------------El jugador no tiene suscripciones activas------------" << endl;
+                cout << "--------------------------------------------------------------------" << endl;    
+            }else{
+                
+                   cout << "---------------- Suscripciones activas ----------------\n" << endl;
+
+                    for(map<string,Videojuego*>::iterator it = juegosU.begin(); it != juegosU.end(); it++){
+                        cout << "   Nombre: " << it->second->getNombre() << "\n" << endl;
+                    }
+
+                cout<< "Seleccione el videojuego: \n"<< endl;
+                leerString(juego);
+
+                while(!IContPartida->selectVideojuego(juego, juegosU)){
+                    cout<< "Ingrese el nombre de un videojuego suscrito: \n"<< endl;
+                    leerString(juego);
+                }
+
+    cout << "Seleccione el tipo de partida: 1- Individual; 2- Multijugador\n" << endl;
+    cin >> tipo;
+    switch (tipo)
+    {
+        case 1:
+        IContPartida->ingresarTipoPartida(S);
+        cout << "\nEs una continuación? 1- Si; 2- No\n";
+        cin >> conf;
+        if(conf == 1){
+            continua = true;
+        }else{
+            continua = false;
+        }
+
+        IContPartida->continuaPartida(continua);
+
+        break;
+        case 2:
+        IContPartida->ingresarTipoPartida(M);
+        cout << "\nIngrese la cantidad de jugadores:\n";
+        cin >> cantParticipantes;
+        cout << "\nFue transmitida en vivo? 1- Si; 2- No\n";
+        cin >> conf;
+        if(conf == 1){
+            enVivo = true;
+        }else{
+            enVivo = false;
+        }
+        IContPartida->datosMultijugador(enVivo, cantParticipantes);
+        break;
+    }
+
+    cout << "\nIngrese la duración de la partida:\n";
+    cin >> duracion;
+
+    IContPartida->ingresarDuracion(duracion);
+
+    cout<< "Estimado Jugador desea confirmar la partida? \n"<< endl;
+    cout<< "Si(1) No(0)  \n"<< endl;
+    
+    cin >> opcion; 
+    if(opcion==0){
+        IContPartida->cancelar();
+    }else{
+        IContPartida->iniciarPartida();
+        
+        system("clear");
+        cout << "---------------------------------------------" << endl;
+        cout << "--------------Partida ingresada--------------" << endl;
+        cout << "---------------------------------------------\n" << endl;  
+
+    }
+    }
+    }
+
+}       
 
 int main() {
 
@@ -607,6 +700,7 @@ int main() {
                 break;
             case 7:
                 system("clear");
+                menuIniciarPartida();
               
                 break;
             case 8:

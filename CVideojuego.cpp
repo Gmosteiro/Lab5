@@ -10,11 +10,10 @@
         Sesion* s = Sesion::getInstancia();
         ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
         map<string, Suscripcion*> sus;
-        Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat, sus);
+        map<int, Partida*> par;
+        Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat, sus, par);
         return mv->agregarVideojuego(v);
     }
-    void CVideojuego::iniciarPartida(){}
-    //CUNFUSED UNGA BUNGA 
 
     void CVideojuego::ingresarNombre(string nombre){
         this->nombre = nombre;
@@ -24,18 +23,6 @@
     }
     void CVideojuego::ingresarCosto(int costo){
         this->costo = costo;
-    }
-    void CVideojuego::ingresarCantJugadores(int cantJugadores){
-        this->cantJugadores = cantJugadores;
-    }
-    void CVideojuego::ingresarDuracion(int duracion){
-        this->duracion = duracion;
-    }
-    void CVideojuego::ingresarContinua(bool continua){
-        this->continua = continua;
-    }
-    void CVideojuego::ingresarTrasmitido(bool transmitido){
-        this->transmitido = transmitido;
     }
     bool CVideojuego::ingresarCategoria(string id){
         bool salida = false;

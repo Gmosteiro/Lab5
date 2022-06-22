@@ -1,7 +1,7 @@
 #include "./Headers/Videojuego.h"
 
     Videojuego::Videojuego(){}
-    Videojuego::Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones){
+    Videojuego::Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones, map<int,Partida*> partidas){
         this->nombre = nombre;
         this->desc = desc;
         this->costo = costo;
@@ -9,6 +9,7 @@
         this->desarrollador = desarrollador;
         this->categorias = categorias;
         this->suscripciones = suscripciones;
+        this->partidas = partidas;
     }
     string Videojuego::getNombre(){
         return this->nombre;
@@ -51,6 +52,12 @@
     }
     void Videojuego::setSuscripciones(string id, Suscripcion* sus){
         this->suscripciones.insert({id, sus});
+    }
+    map<int,Partida*> Videojuego::getPartidas(){
+        return this->partidas;
+    }
+    void Videojuego::setPartidas(int id, Partida* par){
+        this->partidas.insert({id, par});
     }
 
     Videojuego::~Videojuego(){}   

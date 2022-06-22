@@ -1,6 +1,5 @@
 #ifndef PARTIDAMULTIJUGADOR
 #define PARTIDAMULTIJUGADOR
-#include "../Datatypes/DTFechaHora.h"
 #include "Partida.h"
 
 class PartidaMultijugador: public Partida{
@@ -9,7 +8,7 @@ class PartidaMultijugador: public Partida{
         int cantJugadores;
     public:
         PartidaMultijugador();
-        PartidaMultijugador(DTFechaHora fechaHora, int duracion, bool transmitido, int cantJugadores);
+        PartidaMultijugador(int id, Usuario* user, DTFechaHora fechaHora, int duracion, bool transmitido, int cantJugadores);
         bool getTransmitido();
         void setTransmitido(bool transmitido);
         int getCantJugadores();
