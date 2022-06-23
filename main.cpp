@@ -548,15 +548,63 @@ void datosPrueba() {
     IContVideojuego->ingresarCosto(2400);
     IContVideojuego->ingresarCategoria("TIROS_PLAY");
     IContVideojuego->agregarVideojuego();
-
+    // a juan no le gustan los comentarios :C
     IContSesion->cerrarSesion();
 
     cout<< "Se cargo todo anashe\n"<< endl;
 
 }
 
-void menuIniciarPartida(){
 
+void menuMostrarInformacion(){
+    Sesion* ses = Sesion::getInstancia();
+    IContVideojuego = Factorio->getICVideojuego();
+    
+    
+    if(ses->getEstado()){
+
+        list <string> juegos = IContVideojuego->listarVideojuegos();
+
+        if(!juegos.empty()){
+
+            for(list<string>::iterator it = juegos.begin(); it != juegos.end(); it++){
+                cout << it->data() << endl;
+            }
+
+            string juego;
+            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            leerString(juego);
+            IContVideojuego->ingresarNombre(juego);
+
+            DTVideojuego* dt = IContVideojuego->verInformacionVideojuego(); 
+            while(dt==NULL){
+                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                leerString(juego);
+                IContVideojuego->ingresarNombre(juego);
+                dt = IContVideojuego->verInformacionVideojuego();
+            }
+
+            cout << *(dt) << endl;
+
+            
+        }else{
+
+            system("clear");
+            cout << "----------------------------------------------------------------------" << endl;
+            cout << "------------------------- No existen videojuegos ---------------------" << endl;
+            cout << "----------------------------------------------------------------------" << endl; 
+        }   
+    }else{
+        system("clear");
+        cout << "------------------------------------------------------------------------" << endl;
+        cout << "---------------------------- Debe iniciar sesion ------------------------" << endl;
+        cout << "-------------------------------------------------------------------------" << endl;    
+    }
+    
+}
+
+void menuIniciarPartida(){//22/06/22
+//que frio que hace willyrex
     string juego;
     int tipo, duracion, conf, cantParticipantes, opcion;
     bool continua, enVivo;
@@ -569,7 +617,7 @@ void menuIniciarPartida(){
 
     if(!esJugador()){
             cout << "----------------------------------------------" << endl;
-            cout << "----------El usuario no es jugador----------" << endl;
+            cout << "----------El usuario no es jugador----------" << endl;//un hambre
             cout << "----------------------------------------------" << endl;    
         }else{
             juegosU = IContSuscripcion->listarSuscripcionesJugador();
@@ -638,6 +686,7 @@ void menuIniciarPartida(){
     if(opcion==0){
         IContPartida->cancelar();
     }else{
+        
         IContPartida->iniciarPartida();
         
         system("clear");
@@ -649,7 +698,8 @@ void menuIniciarPartida(){
     }
     }
 
-}       
+}      
+
 
 int main() {
 
@@ -705,7 +755,8 @@ int main() {
                 break;
             case 8:
                 system("clear");
-              
+                menuMostrarInformacion();
+
                 break;
             case 9:
                 system("clear");

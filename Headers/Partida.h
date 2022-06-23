@@ -21,6 +21,6 @@ public:
     void setDTFechaHora(DTFechaHora fechaHora);
     int getDuracion();
     void setDuracion(int duracion);
-    ~Partida();   
+    virtual ~Partida();   
 };
 #endif

@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun 20 19:51:30 2022
+# Make data base, printed on Wed Jun 22 19:35:03 2022
 
 # Variables
 
@@ -53,7 +55,7 @@ PATH = /home/ubuntu/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-9bf59bd5-ef2f-470e-bcbb-15dacd75fc82.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-de877aa7-f7f0-45df-9aa0-d22750fded29.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -67,7 +69,7 @@ PWD = /home/ubuntu/workspace/Lab5
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/613_interop
+WSL_INTEROP = /run/WSL/11_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -104,9 +106,6 @@ NAME = PC-GastonMosteiro
 VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/Gaston/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
 MAKE_COMMAND := make
- 
-make: *** No rule to make target 'all'.  Stop.
-
 # default
 .VARIABLES := 
 # automatic
@@ -147,8 +146,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=67/1024=7%, Rehash=0, Collisions=4/92=4%
+# Load=68/1024=7%, Rehash=0, Collisions=4/93=4%
 
 # Pattern-specific Variable Values
 
@@ -156,9 +157,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2064, inode 20941): 55 files, no impossibilities.
+# . (device 2064, inode 20941): 58 files, no impossibilities.
 
-# 55 files, no impossibilities in 1 directories.
+# 58 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -176,7 +177,7 @@ Fabrica.o: Fabrica.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 32):
+#  recipe to execute (from 'makefile', line 38):
 	g++ -g -c Fabrica.cpp
 
 # Not a target:
@@ -189,7 +190,7 @@ PartidaIndividual.o: PartidaIndividual.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 50):
+#  recipe to execute (from 'makefile', line 56):
 	g++ -g -c PartidaIndividual.cpp
 
 CUsuario.o: CUsuario.cpp
@@ -223,7 +224,7 @@ Jugador.o: Jugador.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 35):
+#  recipe to execute (from 'makefile', line 41):
 	g++ -g -c Jugador.cpp
 
 # Not a target:
@@ -242,56 +243,70 @@ Desarrollador.o: Desarrollador.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 23):
+#  recipe to execute (from 'makefile', line 26):
 	g++ -g -c Desarrollador.cpp
 
 DTFechaHora.o: DTFechaHora.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 29):
+#  recipe to execute (from 'makefile', line 32):
 	g++ -g -c DTFechaHora.cpp
 
 ManejadorCategoria.o: ManejadorCategoria.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 38):
+#  recipe to execute (from 'makefile', line 44):
 	g++ -g -c ManejadorCategoria.cpp
 
 ManejadorUsuario.o: ManejadorUsuario.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 41):
+#  recipe to execute (from 'makefile', line 47):
 	g++ -g -c ManejadorUsuario.cpp
+
+CPartida.o: CPartida.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 23):
+	g++ -g -c CPartida.cpp
 
 ManejadorVideojuego.o: ManejadorVideojuego.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 44):
+#  recipe to execute (from 'makefile', line 50):
 	g++ -g -c ManejadorVideojuego.cpp
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-20 19:50:37.194279
+#  Last modified 2022-06-22 19:34:39.9732057
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+DTVideojuego.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 DTCategoria.o: DTCategoria.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 26):
+#  recipe to execute (from 'makefile', line 29):
 	g++ -g -c DTCategoria.cpp
 
 Suscripcion.o: Suscripcion.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 59):
+#  recipe to execute (from 'makefile', line 65):
 	g++ -g -c Suscripcion.cpp
 
 # Not a target:
@@ -304,14 +319,14 @@ PartidaMultijugador.o: PartidaMultijugador.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 53):
+#  recipe to execute (from 'makefile', line 59):
 	g++ -g -c PartidaMultijugador.cpp
 
 Videojuego.o: Videojuego.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 65):
+#  recipe to execute (from 'makefile', line 71):
 	g++ -g -c Videojuego.cpp
 
 # Not a target:
@@ -343,7 +358,7 @@ Partida.o: Partida.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 47):
+#  recipe to execute (from 'makefile', line 53):
 	g++ -g -c Partida.cpp
 
 # Not a target:
@@ -386,10 +401,9 @@ CVideojuego.o: CVideojuego.cpp
 
 clean:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 73):
+#  recipe to execute (from 'makefile', line 79):
 	rm -rf *.o sistema
 	clear
 
@@ -405,24 +419,31 @@ Jugador.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+DTVideojuego.o: DTVideojuego.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 35):
+	g++ -g -c DTVideojuego.cpp
+
 # Not a target:
 Desarrollador.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-main: Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o Desarrollador.o DTCategoria.o DTFechaHora.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o
+main: Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o CPartida.o Desarrollador.o DTCategoria.o DTFechaHora.o DTVideojuego.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 2):
-	g++ Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o Desarrollador.o DTCategoria.o DTFechaHora.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o -g -o sistema
+	g++ Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o CPartida.o Desarrollador.o DTCategoria.o DTFechaHora.o DTVideojuego.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o -g -o sistema
 
 main.o: main.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 70):
+#  recipe to execute (from 'makefile', line 76):
 	g++ -g -c main.cpp
 
 # Not a target:
@@ -445,6 +466,12 @@ ManejadorCategoria.cpp:
 
 # Not a target:
 ManejadorUsuario.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+CPartida.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -478,30 +505,30 @@ Usuario.o: Usuario.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 62):
+#  recipe to execute (from 'makefile', line 68):
 	g++ -g -c Usuario.cpp
 
 Sesion.o: Sesion.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 56):
+#  recipe to execute (from 'makefile', line 62):
 	g++ -g -c Sesion.cpp
 
 # files hash-table stats:
-# Load=50/1024=5%, Rehash=0, Collisions=4/126=3%
+# Load=54/1024=5%, Rehash=0, Collisions=4/136=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 62 / storage = 802 B / avg = 12 B
-# current buf: size = 8162 B / used = 802 B / count = 62 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 65 / storage = 842 B / avg = 12 B
+# current buf: size = 8162 B / used = 842 B / count = 65 / avg = 12 B
 
-# strcache performance: lookups = 156 / hit rate = 60%
+# strcache performance: lookups = 167 / hit rate = 61%
 # hash-table stats:
-# Load=62/8192=1%, Rehash=0, Collisions=1/156=1%
-# Finished Make data base on Mon Jun 20 19:51:30 2022
+# Load=65/8192=1%, Rehash=0, Collisions=1/167=1%
+# Finished Make data base on Wed Jun 22 19:35:03 2022
 
  

@@ -1,11 +1,10 @@
 #include "./Headers/Videojuego.h"
 
     Videojuego::Videojuego(){}
-    Videojuego::Videojuego(string nombre, string desc, int costo, int totalHoras, Usuario* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones, map<int,Partida*> partidas){
+    Videojuego::Videojuego(string nombre, string desc, int costo, Usuario* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones, map<int,Partida*> partidas){
         this->nombre = nombre;
         this->desc = desc;
         this->costo = costo;
-        this->totalHoras = totalHoras;
         this->desarrollador = desarrollador;
         this->categorias = categorias;
         this->suscripciones = suscripciones;
@@ -28,12 +27,6 @@
     }
     void Videojuego::setCosto(int costo){
         this->costo = costo;
-    }
-    int Videojuego::getTotalHoras(){
-        return this->totalHoras;
-    }
-    void Videojuego::setTotalHoras(int totalHoras){
-        this->totalHoras = totalHoras;
     }
     Usuario* Videojuego::getDesarrollador(){
         return this->desarrollador; //actulizated 7/6/22  nou room scape here
@@ -59,5 +52,34 @@
     void Videojuego::setPartidas(int id, Partida* par){
         this->partidas.insert({id, par});
     }
+    DTVideojuego* Videojuego::getDTVideojuego(){
+        
+        Desarrollador* des = dynamic_cast<Desarrollador*>(this->desarrollador);
+        map<string,DTCategoria*> cat;
+        int horas = 0;
 
+        for(map<string,Categoria*>::iterator it = this->categorias.begin(); it != this->categorias.end(); it++){
+            cat.insert({it->second->getId(),it->second->getDTCategoria()});
+        }
+
+        for(map<int,Partida*>::iterator it = this->partidas.begin(); it != this->partidas.end(); it++)
+        {
+            PartidaIndividual* pi = dynamic_cast<PartidaIndividual*>(it->second);
+
+            if(pi!=NULL)
+            {
+                horas += pi->getDuracion();                
+            }else{            
+                PartidaMultijugador* pm = dynamic_cast<PartidaMultijugador*>(it->second);
+                if(pm!=NULL)
+                {
+                    horas += pm->getDuracion()*pm->getCantJugadores();
+                }
+            }
+        }
+
+        DTVideojuego* dt = new DTVideojuego(this->nombre,this->desc,des->getNomEmp(),this->costo, cat, horas);
+        return dt;  
+    }
+        
     Videojuego::~Videojuego(){}   

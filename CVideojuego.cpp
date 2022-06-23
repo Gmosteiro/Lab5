@@ -1,7 +1,13 @@
 #include "./Headers/CVideojuego.h"
 
-    void CVideojuego::CVideojuego::verInformacionVideojuego(){
-
+    DTVideojuego* CVideojuego::CVideojuego::verInformacionVideojuego(){
+        DTVideojuego* dt = NULL;
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        Videojuego* v = mv->getVideojuego(this->nombre);
+        if(v!=NULL)
+            dt=v->getDTVideojuego();
+       
+        return dt;
     }
     void CVideojuego::eliminarVideojuego(){
 
@@ -11,7 +17,7 @@
         ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
         map<string, Suscripcion*> sus;
         map<int, Partida*> par;
-        Videojuego* v = new Videojuego(nombre, desc, costo, 0, s->getUser(), cat, sus, par);
+        Videojuego* v = new Videojuego(nombre, desc, costo, s->getUser(), cat, sus, par);
         return mv->agregarVideojuego(v);
     }
 
@@ -34,5 +40,19 @@
                 salida = true;
             }
         return salida;
+    }
+    
+    list <string> CVideojuego::listarVideojuegos(){
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        list <string> retorno;
+        map<string, Videojuego*> aux = mv->getVideojuegos();
+
+        for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){     
+            list<string>::iterator itr = retorno.begin();
+            retorno.insert(itr, it->first);
+            itr++;
+        }
+            
+        return retorno;
     }
     void CVideojuego::cancelar(){}

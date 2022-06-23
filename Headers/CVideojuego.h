@@ -14,7 +14,7 @@ class CVideojuego: public ICVideojuego{
         int costo;
         map<string, Categoria*> cat;
     public:
-        void verInformacionVideojuego();
+        DTVideojuego* verInformacionVideojuego();
         void eliminarVideojuego();
         bool agregarVideojuego();
     
@@ -22,6 +22,7 @@ class CVideojuego: public ICVideojuego{
         void ingresarDescripcion(string desc);
         void ingresarCosto(int costo);
         bool ingresarCategoria (string id);
+        list <string> listarVideojuegos();
         void cancelar();
 };
 

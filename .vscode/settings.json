@@ -9,6 +9,9 @@
         "string": "cpp",
         "iosfwd": "cpp",
         "ostream": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "memory": "cpp",
+        "istream": "cpp",
+        "functional": "cpp"
     }
 }

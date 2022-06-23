@@ -1,9 +1,11 @@
 #ifndef ICVIDEOJUEGO
 #define ICVIDEOJUEGO
 #include "../Datatypes/DTCategoria.h"
+#include "../Datatypes/DTVideojuego.h"
 #include "Categoria.h"
 
 #include<string>
+#include<list>
 #include<map>
 
 using namespace std;
@@ -11,7 +13,7 @@ using namespace std;
 class ICVideojuego{
         
     public:
-        virtual void verInformacionVideojuego()=0;
+        virtual DTVideojuego* verInformacionVideojuego()=0;
         virtual void eliminarVideojuego()=0;
         virtual bool agregarVideojuego()=0;
 
@@ -19,6 +21,7 @@ class ICVideojuego{
         virtual void ingresarDescripcion(string desc) = 0;
         virtual void ingresarCosto(int costo) = 0;
         virtual bool ingresarCategoria (string id)=0;
+        virtual list <string> listarVideojuegos()=0;
         virtual void cancelar ()=0;
         
 };

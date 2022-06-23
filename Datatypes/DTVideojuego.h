@@ -1,27 +1,35 @@
 #ifndef DTVIDEOJUEGO
 #define DTVIDEOJUEGO
+#include "DTCategoria.h"
 #include <iostream>
+#include <map>
 
 using namespace std;
 
-class DTvideojuego{
+class DTVideojuego{
     private:
-        int dia, mes, anio, hora, minuto;
+        string nombre, descripcion, empresa;
+        int costo;
+        map <string,DTCategoria*> categorias;
+        int totalHoras;
+        
     public:
-        /*DTvideojuego();
-        DTvideojuego(string nombreJuego, string  descripcion, int  costo, string email);
-        string getJuego();
-        void setnombreJuego( dia);
-        int getMes();
-        void setMes(int mes);
-        int getAnio();
-        void setAnio(int anio);
-        int getHora();
-        void setHora(int hora);
-        int getMinuto();
-        void setMinuto(int minuto);
-        ~DTFechaHora();
+        DTVideojuego();
+        DTVideojuego(string nombre, string descripcion, string empresa, int costo, map <string,DTCategoria*> categorias, int totalHoras);
+        string getNombre();
+        void setNombre(string nombre);
+        string getDescripcion();
+        void setDescripcion(string descripcion);
+        string getEmpresa();
+        void setEmpresa(string empresa);
+        int getCosto();
+        void setCosto(int costo);
+        map <string,DTCategoria*> getCategorias();
+        void setCategorias(string id, DTCategoria* dtc);
+        int getTotalHoras();
+        void setTotalHoras(int totalHoras);
+        ~DTVideojuego();
 
-        friend ostream& operator <<(ostream&,DTFechaHora&);*/
+        friend ostream& operator <<(ostream&,DTVideojuego&);
 };
 #endif
