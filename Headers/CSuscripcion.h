@@ -17,11 +17,13 @@ class CSuscripcion: public ICSuscripcion{
     public:
     
     void suscribirseAVideojuego();
+    void cancelarSuscripcion();
     
     map<string, Videojuego*> listarSuscripcionesJugador();
     map<string, Videojuego*> listarRestoSuscripciones();
 
     bool nombreVideojuego(string nombre);
+    bool nombreVideojuegoSuscrito(string nombre);
     void tipoPago(TipoPago tipo);
     void cancelar();
 

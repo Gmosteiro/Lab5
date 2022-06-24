@@ -16,6 +16,15 @@ void CSuscripcion::suscribirseAVideojuego(){
 
     vid->setSuscripciones(s->getUser()->getEmail(),sus);
     }
+
+void CSuscripcion::cancelarSuscripcion(){
+
+    ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+    Sesion* s = Sesion::getInstancia();
+
+    mv->getVideojuego(this->nombre)->borrarSuscripcionVideojuego(s->getUser());   
+        
+}
         
 map<string, Videojuego*> CSuscripcion::listarSuscripcionesJugador(){
 
@@ -80,6 +89,22 @@ bool CSuscripcion::nombreVideojuego(string nombre){
     return salida;
 
 }
+
+bool CSuscripcion::nombreVideojuegoSuscrito(string nombre){
+
+    bool salida = false;
+
+    map<string, Videojuego*> susJug = listarSuscripcionesJugador();
+
+    map<string,Videojuego*>::iterator it = susJug.find(nombre);
+        if (it != susJug.end()){
+            this->nombre=nombre;
+            salida = true;            
+        }
+    return salida;
+
+}
+
 void CSuscripcion::tipoPago(TipoPago tipo){
     this->tipo = tipo;
 }
