@@ -416,7 +416,7 @@ void menuSuscribirseVideojuego(){
         Sesion* ses = Sesion::getInstancia();
         IContSuscripcion = Factorio->getICSuscripcion();
         map<string, Videojuego*> restoSus;
-        map<string, Videojuego*> jugSus;
+        map<string, Videojuego*> jugSus; 
         string nombre;
         int t;
         TipoPago tipo;
@@ -808,6 +808,69 @@ void eliminarVideojuego(){
 
 }
 
+void menuAsignarPuntaje(){}
+
+void menuCancelarSuscripcion(){
+
+    IContSuscripcion = Factorio->getICSuscripcion();
+
+    if(esJugador()){
+
+        map<string, Videojuego*> jugSus = IContSuscripcion->listarSuscripcionesJugador();
+
+        if(!jugSus.empty()){
+
+            for(map<string,Videojuego*>::iterator it = jugSus.begin(); it != jugSus.end(); it++){
+                cout << it->second->getNombre() << endl;
+            }
+
+            string nombre;
+            cout<< "Seleccione el videojuego: \n"<< endl;
+            leerString(nombre);
+
+            while(!IContSuscripcion->nombreVideojuegoSuscrito(nombre)){
+                cout<< "Ingrese un nombre correcto: \n"<< endl;
+                leerString(nombre);
+            }
+            
+            cout << "¿Esta seguro de cancelar su suscripcion?" << endl;
+            cout<< "Si(1) No(0)  \n"<< endl;
+            int opcion;
+            cin >> opcion; 
+            if(opcion==0){
+                IContSuscripcion->cancelar();
+            }else{
+                
+                IContSuscripcion->cancelarSuscripcion();
+                
+                system("clear");
+                cout << "-------------------------" << endl;
+                cout << "- Suscripcion cancelada -" << endl;
+                cout << "-------------------------\n" << endl;  
+
+            }
+
+        }else{
+
+            cout << "----------------------------------------" << endl;
+            cout << "- No esta suscrito a ningun videojuego -" << endl;
+            cout << "----------------------------------------\n" << endl;  
+
+        }
+
+    }else{
+        cout << "-----------------" << endl;
+        cout << "- No es jugador -" << endl;
+        cout << "-----------------\n" << endl;  
+    }
+
+}
+
+void menuBuscarVideojuegoCategoria(){}
+
+void menuRanking(){}
+
+void menuVerPartidasVideojuego(){}
 
 int main() {
 
@@ -877,6 +940,7 @@ int main() {
                 break;
             case 11:
                 system("clear");
+                menuCancelarSuscripcion();
               
                 break;
             case 12:

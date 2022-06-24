@@ -31,6 +31,4 @@
     void Partida::setDuracion(int duracion){
         this->duracion = duracion;
     }
-    Partida::~Partida(){
-        delete(this);
-    }   
+    Partida::~Partida(){}   

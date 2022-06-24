@@ -40,6 +40,7 @@ public:
     map<int,Partida*> getPartidas();
     void setPartidas(int id, Partida* par);
     DTVideojuego* getDTVideojuego();
+    void borrarSuscripcionVideojuego(Usuario* user);
     ~Videojuego();   
 };
 #endif

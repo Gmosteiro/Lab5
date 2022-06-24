@@ -81,6 +81,14 @@
         DTVideojuego* dt = new DTVideojuego(this->nombre,this->desc,des->getNomEmp(),this->costo, cat, horas);
         return dt;  
     }
+
+    void Videojuego::borrarSuscripcionVideojuego(Usuario* user){
+
+        map<string,Suscripcion*>::iterator it = this->suscripciones.find(user->getEmail());
+        if (it != this->suscripciones.end())      
+            this->suscripciones.erase(user->getEmail());
+
+    }
         
     Videojuego::~Videojuego(){
 
@@ -91,6 +99,4 @@
         for(map<int,Partida*>::iterator it = this->partidas.begin(); it != this->partidas.end(); it++){
             this->partidas.erase(it);
         }
-        delete(this); //meme, si esto anda......
-
     }  //destructor 
