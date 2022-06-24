@@ -509,6 +509,12 @@ void datosPrueba() {
 
     IContUsuario = Factorio->getICUsuario();
 
+    IContUsuario->datosComunes("des2","des2");
+    IContUsuario->datosEmpresa("empresa");
+    IContUsuario->altaUsuario();
+
+    IContUsuario = Factorio->getICUsuario();
+
     IContUsuario->datosComunes("jug", "jug");
     IContUsuario->datosJugador("jug", "jug");
 
@@ -549,58 +555,54 @@ void datosPrueba() {
     IContVideojuego->ingresarCategoria("TIROS_PLAY");
     IContVideojuego->agregarVideojuego();
     // a juan no le gustan los comentarios :C
+
+    IContSesion->cerrarSesion();
+
+    IContVideojuego = Factorio->getICVideojuego();
+    IContSesion = Factorio->getICSesion();
+    
+    IContSesion->ingresaEmail("des2");
+    IContSesion->verificarPass("des2");
+    IContSesion->iniciarSesion();
+
+    IContVideojuego->ingresarNombre("BATEGIL");
+    IContVideojuego->ingresarDescripcion("PIUM");
+    IContVideojuego->ingresarCosto(2600);
+    IContVideojuego->ingresarCategoria("TIROS_PLAY");
+    IContVideojuego->agregarVideojuego();
+
+    IContSesion->cerrarSesion();
+
+    IContSesion->ingresaEmail("jug");
+    IContSesion->verificarPass("jug");
+    IContSesion->iniciarSesion();
+
+    IContSuscripcion = Factorio->getICSuscripcion();
+
+    IContSuscripcion->nombreVideojuego("FIFA");
+    IContSuscripcion->tipoPago(CREDITO);
+    IContSuscripcion->suscribirseAVideojuego();
+
+    IContPartida = Factorio->getICPartida();
+
+    IContPartida->selectVideojuego("FIFA", IContSuscripcion->listarSuscripcionesJugador());
+    IContPartida->ingresarTipoPartida(S);
+    IContPartida->continuaPartida(true);
+    IContPartida->ingresarDuracion(10);
+    IContPartida->iniciarPartida();
+
+    IContPartida = Factorio->getICPartida();
+
+    IContPartida->selectVideojuego("FIFA", IContSuscripcion->listarSuscripcionesJugador());
+    IContPartida->ingresarTipoPartida(M);
+    IContPartida->datosMultijugador(false, 3);
+    IContPartida->ingresarDuracion(5);
+    IContPartida->iniciarPartida();
+    
     IContSesion->cerrarSesion();
 
     cout<< "Se cargo todo anashe\n"<< endl;
 
-}
-
-
-void menuMostrarInformacion(){
-    Sesion* ses = Sesion::getInstancia();
-    IContVideojuego = Factorio->getICVideojuego();
-    
-    
-    if(ses->getEstado()){
-
-        list <string> juegos = IContVideojuego->listarVideojuegos();
-
-        if(!juegos.empty()){
-
-            for(list<string>::iterator it = juegos.begin(); it != juegos.end(); it++){
-                cout << it->data() << endl;
-            }
-
-            string juego;
-            cout<< "\nSeleccione el videojuego: \n"<< endl;
-            leerString(juego);
-            IContVideojuego->ingresarNombre(juego);
-
-            DTVideojuego* dt = IContVideojuego->verInformacionVideojuego(); 
-            while(dt==NULL){
-                cout<< "\nSeleccione un nombre valido: \n"<< endl;
-                leerString(juego);
-                IContVideojuego->ingresarNombre(juego);
-                dt = IContVideojuego->verInformacionVideojuego();
-            }
-
-            cout << *(dt) << endl;
-
-            
-        }else{
-
-            system("clear");
-            cout << "----------------------------------------------------------------------" << endl;
-            cout << "------------------------- No existen videojuegos ---------------------" << endl;
-            cout << "----------------------------------------------------------------------" << endl; 
-        }   
-    }else{
-        system("clear");
-        cout << "------------------------------------------------------------------------" << endl;
-        cout << "---------------------------- Debe iniciar sesion ------------------------" << endl;
-        cout << "-------------------------------------------------------------------------" << endl;    
-    }
-    
 }
 
 void menuIniciarPartida(){//22/06/22
@@ -700,6 +702,112 @@ void menuIniciarPartida(){//22/06/22
 
 }      
 
+void menuMostrarInformacion(){
+    Sesion* ses = Sesion::getInstancia();
+    IContVideojuego = Factorio->getICVideojuego();
+    
+    
+    if(ses->getEstado()){
+
+        list <string> juegos = IContVideojuego->listarVideojuegos();
+
+        if(!juegos.empty()){
+
+            for(list<string>::iterator it = juegos.begin(); it != juegos.end(); it++){
+                cout << it->data() << endl;
+            }
+
+            string juego;
+            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            leerString(juego);
+            IContVideojuego->ingresarNombre(juego);
+
+            DTVideojuego* dt = IContVideojuego->verInformacionVideojuego(); 
+            while(dt==NULL){
+                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                leerString(juego);
+                IContVideojuego->ingresarNombre(juego);
+                dt = IContVideojuego->verInformacionVideojuego();
+            }
+
+            cout << *(dt) << endl;
+
+            
+        }else{
+
+            system("clear");
+            cout << "----------------------------------------------------------------------" << endl;
+            cout << "------------------------- No existen videojuegos ---------------------" << endl;
+            cout << "----------------------------------------------------------------------" << endl; 
+        }   
+    }else{
+        system("clear");
+        cout << "------------------------------------------------------------------------" << endl;
+        cout << "---------------------------- Debe iniciar sesion ------------------------" << endl;
+        cout << "-------------------------------------------------------------------------" << endl;    
+    }
+    
+}
+
+void eliminarVideojuego(){
+
+    IContVideojuego = Factorio->getICVideojuego();
+
+    if(esDesarrollador()){
+
+        list <string> juegos = IContVideojuego->listarVideojuegosDesarrollador();
+
+        if(!juegos.empty()){
+
+            for(list<string>::iterator it = juegos.begin(); it != juegos.end(); it++){
+                cout << it->data() << endl;
+            }
+
+            string juego;
+            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            leerString(juego);
+            IContVideojuego->ingresarNombre(juego);
+            
+            while(!IContVideojuego->buscarJuegoDesarrollador()){
+                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                leerString(juego);
+                IContVideojuego->ingresarNombre(juego);
+            }
+            
+            cout << "¿Esta seguro de eliminar?" << endl;
+            cout<< "Si(1) No(0)  \n"<< endl;
+            int opcion;
+            cin >> opcion; 
+            if(opcion==0){
+                IContVideojuego->cancelar();
+            }else{
+                
+                IContVideojuego->eliminarVideojuego();
+                
+                system("clear");
+                cout << "------------------------" << endl;
+                cout << "- Videojuego eliminado -" << endl;
+                cout << "------------------------\n" << endl;  
+
+            }
+
+        }else{
+
+            cout << "------------------------------------" << endl;
+            cout << "- No tiene videojuegos registrados -" << endl;
+            cout << "------------------------------------\n" << endl;  
+
+        }
+
+    }else{
+        cout << "-----------------------" << endl;
+        cout << "- No es desarrollador -" << endl;
+        cout << "-----------------------\n" << endl;  
+    }
+
+
+}
+
 
 int main() {
 
@@ -760,6 +868,7 @@ int main() {
                 break;
             case 9:
                 system("clear");
+                eliminarVideojuego();
               
                 break;
             case 10:

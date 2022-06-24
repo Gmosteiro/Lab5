@@ -10,7 +10,8 @@
         return dt;
     }
     void CVideojuego::eliminarVideojuego(){
-
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        mv->removerVideojuego(mv->getVideojuego(this->nombre));
     }
     bool CVideojuego::agregarVideojuego(){
         Sesion* s = Sesion::getInstancia();
@@ -53,6 +54,39 @@
             itr++;
         }
             
+        return retorno;
+    }
+
+    list <string> CVideojuego::listarVideojuegosDesarrollador(){
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        Sesion* s = Sesion::getInstancia();
+        list <string> retorno;
+        map<string, Videojuego*> aux = mv->getVideojuegos();
+
+        for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){     
+            list<string>::iterator itr = retorno.begin();
+            
+            if(it->second->getDesarrollador()==s->getUser()){
+                retorno.insert(itr, it->first);
+                itr++;
+            }
+            
+        }
+            
+        return retorno;
+    }
+
+    bool CVideojuego::buscarJuegoDesarrollador(){
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        Sesion* s = Sesion::getInstancia();
+        bool retorno = false;
+
+        Videojuego* v = mv->getVideojuego(this->nombre);
+
+        if(v!=NULL && v->getDesarrollador()==s->getUser()){
+            retorno = true;
+        }
+
         return retorno;
     }
     void CVideojuego::cancelar(){}

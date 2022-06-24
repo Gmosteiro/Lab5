@@ -23,6 +23,8 @@ class CVideojuego: public ICVideojuego{
         void ingresarCosto(int costo);
         bool ingresarCategoria (string id);
         list <string> listarVideojuegos();
+        list <string> listarVideojuegosDesarrollador();
+        bool buscarJuegoDesarrollador();
         void cancelar();
 };
 

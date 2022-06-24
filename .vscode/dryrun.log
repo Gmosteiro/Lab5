@@ -1,5 +1,29 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/ubuntu/workspace/Lab5'
+g++ -g -c Categoria.cpp
+g++ -g -c CCategoria.cpp
+g++ -g -c CSesion.cpp
+g++ -g -c CUsuario.cpp
+g++ -g -c CVideojuego.cpp
+g++ -g -c CSuscripcion.cpp
+g++ -g -c CPartida.cpp
+g++ -g -c Desarrollador.cpp
+g++ -g -c DTCategoria.cpp
+g++ -g -c DTFechaHora.cpp
+g++ -g -c DTVideojuego.cpp
+g++ -g -c Fabrica.cpp
+g++ -g -c Jugador.cpp
+g++ -g -c main.cpp
+g++ -g -c ManejadorCategoria.cpp
+g++ -g -c ManejadorUsuario.cpp
+g++ -g -c ManejadorVideojuego.cpp
+g++ -g -c Partida.cpp
+g++ -g -c PartidaIndividual.cpp
+g++ -g -c PartidaMultijugador.cpp
+g++ -g -c Sesion.cpp
+g++ -g -c Suscripcion.cpp
+g++ -g -c Usuario.cpp
+g++ -g -c Videojuego.cpp
 g++ Categoria.o CCategoria.o CSesion.o CUsuario.o CVideojuego.o CSuscripcion.o CPartida.o Desarrollador.o DTCategoria.o DTFechaHora.o DTVideojuego.o Fabrica.o Jugador.o main.o ManejadorCategoria.o ManejadorUsuario.o ManejadorVideojuego.o Partida.o PartidaIndividual.o PartidaMultijugador.o Sesion.o Suscripcion.o Usuario.o Videojuego.o -g -o sistema
 make: Leaving directory '/home/ubuntu/workspace/Lab5'
  

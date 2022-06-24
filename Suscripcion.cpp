@@ -25,4 +25,6 @@
         this->jugador = jugador;
     }
 
-    Suscripcion::~Suscripcion(){} 
+    Suscripcion::~Suscripcion(){
+        delete(this);
+    } 

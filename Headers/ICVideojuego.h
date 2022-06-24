@@ -22,6 +22,8 @@ class ICVideojuego{
         virtual void ingresarCosto(int costo) = 0;
         virtual bool ingresarCategoria (string id)=0;
         virtual list <string> listarVideojuegos()=0;
+        virtual list <string> listarVideojuegosDesarrollador()=0;
+        virtual bool buscarJuegoDesarrollador()=0;
         virtual void cancelar ()=0;
         
 };

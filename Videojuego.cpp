@@ -82,4 +82,15 @@
         return dt;  
     }
         
-    Videojuego::~Videojuego(){}   
+    Videojuego::~Videojuego(){
+
+        for(map<string,Suscripcion*>::iterator it = this->suscripciones.begin(); it != this->suscripciones.end(); it++){
+            this->suscripciones.erase(it);
+        }
+
+        for(map<int,Partida*>::iterator it = this->partidas.begin(); it != this->partidas.end(); it++){
+            this->partidas.erase(it);
+        }
+        delete(this); //meme, si esto anda......
+
+    }  //destructor 
