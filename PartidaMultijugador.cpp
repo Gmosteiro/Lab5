@@ -1,6 +1,6 @@
 #include "./Headers/PartidaMultijugador.h"
     PartidaMultijugador::PartidaMultijugador(){}
-    PartidaMultijugador::PartidaMultijugador(int id, Usuario* user, DTFechaHora fechaHora, int duracion, bool transmitido, int cantJugadores){
+    PartidaMultijugador::PartidaMultijugador(int id, Usuario* user, DTFechaHora* fechaHora, int duracion, bool transmitido, int cantJugadores){
         setID(id);
         setUsuario(user);
         setDTFechaHora(fechaHora);
@@ -19,5 +19,9 @@
     }
     void PartidaMultijugador::setCantJugadores(int cantJugadores){
         this->cantJugadores = cantJugadores;
+    }
+    DTPartida* PartidaMultijugador::getDTPartida(){
+        DTPartida* dtpm = new DTPartidaMultijugador(this->getId(), this->getUsuario(), this->getDTFechaHora(), this->getDuracion(), this->transmitido, this->cantJugadores);
+        return dtpm;
     }
     PartidaMultijugador::~PartidaMultijugador(){}

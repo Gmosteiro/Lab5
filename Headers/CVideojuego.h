@@ -24,7 +24,10 @@ class CVideojuego: public ICVideojuego{
         bool ingresarCategoria (string id);
         list <string> listarVideojuegos();
         list <string> listarVideojuegosDesarrollador();
+        list <Videojuego*> listarNombreDescVideojuegos();
         bool buscarJuegoDesarrollador();
+        bool buscarJuego();
+        list <DTPartida*> verPartidas();
         void cancelar();
 };
 

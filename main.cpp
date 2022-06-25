@@ -870,7 +870,66 @@ void menuBuscarVideojuegoCategoria(){}
 
 void menuRanking(){}
 
-void menuVerPartidasVideojuego(){}
+void menuVerPartidasVideojuego(){//24/06/22
+    
+    IContVideojuego = Factorio->getICVideojuego();
+
+    if(esDesarrollador()){
+
+        list <Videojuego*> juegos = IContVideojuego->listarNombreDescVideojuegos();
+
+        if(!juegos.empty()){
+
+            for(list<Videojuego*>::iterator it = juegos.begin(); it != juegos.end(); it++){
+                cout << "Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
+            }
+
+            string juego;
+            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            leerString(juego);
+            IContVideojuego->ingresarNombre(juego);
+            
+            while(!IContVideojuego->buscarJuego()){
+                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                leerString(juego);
+                IContVideojuego->ingresarNombre(juego);
+            }
+            
+            list<DTPartida*> partidas;
+            partidas = IContVideojuego->verPartidas();
+
+            for(list<DTPartida*>::iterator it = partidas.begin(); it != partidas.end(); it++){
+
+                DTPartidaIndividual* pi = dynamic_cast<DTPartidaIndividual*>((*it));
+
+                if(pi!=NULL){
+                    cout << *pi << endl;
+                }
+                
+                DTPartidaMultijugador* pm = dynamic_cast<DTPartidaMultijugador*>(*it);
+
+                if(pm!=NULL){
+                    cout << *pm << endl;
+                }
+                   
+               
+            }
+
+        }else{
+
+            cout << "-----------------------------" << endl;
+            cout << "- No hay juegos registrados -" << endl;
+            cout << "-----------------------------\n" << endl;  
+
+        }
+
+    }else{
+        cout << "-----------------------" << endl;
+        cout << "- No es desarrollador -" << endl;
+        cout << "-----------------------\n" << endl;  
+    }
+
+}
 
 int main() {
 
@@ -953,6 +1012,7 @@ int main() {
                 break;
             case 14:
                 system("clear");
+                menuVerPartidasVideojuego();
               
                 break;
             case 15:

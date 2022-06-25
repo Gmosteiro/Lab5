@@ -4,17 +4,17 @@
         int id = this->videojuego->getPartidas().size();
         time_t t = time(NULL);
 	    tm* timePtr = localtime(&t);    
-        DTFechaHora *fecha = new DTFechaHora(timePtr->tm_mday, (timePtr->tm_mon+1), (timePtr->tm_year+1900), timePtr->tm_hour, timePtr->tm_min);
+        DTFechaHora* fecha = new DTFechaHora(timePtr->tm_mday, (timePtr->tm_mon+1), (timePtr->tm_year+1900), timePtr->tm_hour, timePtr->tm_min);
         Sesion* s = Sesion::getInstancia();
 
         if(this->tipo==S){
             
-            Partida* p = new PartidaIndividual(id, s->getUser(), *fecha, this->duracion, this->continua);
+            Partida* p = new PartidaIndividual(id, s->getUser(), fecha, this->duracion, this->continua);
             this->videojuego->setPartidas(id, p);
 
         }else{
 
-            Partida* p = new PartidaMultijugador(id, s->getUser(), *fecha, this->duracion, this->enVivo, this->cantJug);
+            Partida* p = new PartidaMultijugador(id, s->getUser(), fecha, this->duracion, this->enVivo, this->cantJug);
             this->videojuego->setPartidas(id, p);
 
         }

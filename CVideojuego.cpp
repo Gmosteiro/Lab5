@@ -76,6 +76,20 @@
         return retorno;
     }
 
+    list <Videojuego*> CVideojuego::listarNombreDescVideojuegos(){
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        map<string, Videojuego*> aux = mv->getVideojuegos();
+        list <Videojuego*> retorno;
+
+        for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){     
+            list<Videojuego*>::iterator itr = retorno.begin();
+                retorno.insert(itr, it->second);
+                itr++;
+        }
+            
+        return retorno;
+    }
+
     bool CVideojuego::buscarJuegoDesarrollador(){
         ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
         Sesion* s = Sesion::getInstancia();
@@ -89,4 +103,34 @@
 
         return retorno;
     }
+
+    bool CVideojuego::buscarJuego(){
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        bool retorno = false;
+
+        Videojuego* v = mv->getVideojuego(this->nombre);
+
+        if(v!=NULL)
+            retorno = true;
+        
+        return retorno;
+    }
+
+    list <DTPartida*> CVideojuego::verPartidas(){
+        
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        map<int,Partida*> partidas = mv->getVideojuego(this->nombre)->getPartidas();
+        list <DTPartida*> retorno;
+
+        for(map<int,Partida*>::iterator it = partidas.begin(); it != partidas.end(); it++){     
+            list<DTPartida*>::iterator itr = retorno.begin();
+                DTPartida* dtp = it->second->getDTPartida();
+                retorno.insert(itr, dtp);        
+            itr++;
+        }
+            
+        return retorno;
+
+    }
+    
     void CVideojuego::cancelar(){}

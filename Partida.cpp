@@ -1,7 +1,7 @@
 #include "./Headers/Partida.h"
 
     Partida::Partida(){}
-    Partida::Partida(int id, Usuario* user, DTFechaHora fechaHora, int duracion){
+    Partida::Partida(int id, Usuario* user, DTFechaHora* fechaHora, int duracion){
         this->id = id;
         this->user = user;
         this->fechaHora = fechaHora;
@@ -12,17 +12,17 @@
     }
     void Partida::setID(int id){
         this->id = id;
-    }
+    } 
     Usuario* Partida::getUsuario(){
         return this->user;
     }
     void Partida::setUsuario(Usuario* user){
         this->user = user;
     }
-    DTFechaHora Partida::getDTFechaHora(){
+    DTFechaHora* Partida::getDTFechaHora(){
         return this->fechaHora;
     }
-    void Partida::setDTFechaHora(DTFechaHora fechaHora){
+    void Partida::setDTFechaHora(DTFechaHora* fechaHora){
         this->fechaHora = fechaHora;
     }
     int Partida::getDuracion(){
