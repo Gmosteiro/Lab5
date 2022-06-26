@@ -17,6 +17,7 @@ class ICVideojuego{
         virtual DTVideojuego* verInformacionVideojuego()=0;
         virtual void eliminarVideojuego()=0;
         virtual bool agregarVideojuego()=0;
+        virtual void asignarPuntaje()=0;
 
         virtual void ingresarNombre(string nombre) = 0;
         virtual void ingresarDescripcion(string desc) = 0;
@@ -28,6 +29,7 @@ class ICVideojuego{
         virtual bool buscarJuegoDesarrollador()=0;
         virtual bool buscarJuego()=0;
         virtual list <DTPartida*> verPartidas()=0;
+        virtual void ingresarPuntuacion(int puntuacion) = 0;
         virtual void cancelar ()=0;
         
 };

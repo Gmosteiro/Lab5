@@ -92,7 +92,11 @@ void menuAltaDeUsuario() {
         leerString(email);
         cout<< "Ingrese contraseña: \n"<< endl;
         leerString(pass);
-        IContUsuario->datosComunes(email, pass);
+        
+        while(IContUsuario->datosComunes(email, pass)){
+            cout<< "Ya existe un usuario con ese email, ingrese otro:"<< endl;
+            leerString(email);
+        }
        
         cout << "Es desarrollador(1) o Jugador (2)? \n"; //editado 13/06/2022
         cin >> tipo;
@@ -129,6 +133,7 @@ void menuAltaDeUsuario() {
                             system("clear");
                             cout << "Operacion cancelada\n" << endl;
                             IContUsuario->cancelar();
+                            a = false;
                         }
                     }             
                 }
@@ -808,7 +813,58 @@ void eliminarVideojuego(){
 
 }
 
-void menuAsignarPuntaje(){}
+void menuAsignarPuntaje(){
+
+    IContVideojuego = Factorio->getICVideojuego();
+
+    if(esJugador()){
+
+        list <Videojuego*> juegos = IContVideojuego->listarNombreDescVideojuegos();
+
+        if(!juegos.empty()){
+
+            for(list<Videojuego*>::iterator it = juegos.begin(); it != juegos.end(); it++){
+                cout << "Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
+            }
+
+            string juego;
+            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            leerString(juego);
+            IContVideojuego->ingresarNombre(juego);
+            
+            while(!IContVideojuego->buscarJuego()){
+                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                leerString(juego);
+                IContVideojuego->ingresarNombre(juego);
+            }
+
+            int puntuacion = 1;
+            cout << "\nSeleccione su puntuacion (desde 1 a 5): \n"<< endl;
+            cin >> puntuacion;
+            
+            IContVideojuego->ingresarPuntuacion(puntuacion);
+            IContVideojuego->asignarPuntaje();
+
+            cout << "--------------------" << endl;
+            cout << "- Puntaje asignado -" << endl;
+            cout << "--------------------\n" << endl;  
+            
+
+        }else{
+
+            cout << "-----------------------------" << endl;
+            cout << "- No hay juegos registrados -" << endl;
+            cout << "-----------------------------\n" << endl;  
+
+        }
+
+    }else{
+        cout << "-----------------" << endl;
+        cout << "- No es Jugador -" << endl;
+        cout << "-----------------\n" << endl;  
+    }
+
+}
 
 void menuCancelarSuscripcion(){
 
@@ -995,6 +1051,7 @@ int main() {
                 break;
             case 10:
                 system("clear");
+                menuAsignarPuntaje();
               
                 break;
             case 11:

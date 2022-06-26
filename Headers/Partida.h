@@ -2,22 +2,22 @@
 #define PARTIDA
 #include "../Datatypes/DTFechaHora.h"
 #include "../Datatypes/DTPartida.h"
-#include "Usuario.h"
+#include "Jugador.h"
 
 using namespace std;
 
 class Partida{
 private:
     DTFechaHora* fechaHora;
-    Usuario* user;
+    Jugador* user;
     int duracion, id;
 public:
     Partida();
-    Partida(int id, Usuario* user, DTFechaHora* fechaHora, int duracion);
+    Partida(int id, Jugador* user, DTFechaHora* fechaHora, int duracion);
     int getId();
     void setID(int id);
-    Usuario* getUsuario();
-    void setUsuario(Usuario* user);
+    Jugador* getUsuario();
+    void setUsuario(Jugador* user);
     DTFechaHora* getDTFechaHora();
     void setDTFechaHora(DTFechaHora* fechaHora);
     int getDuracion();

@@ -1,7 +1,7 @@
 #include "./Headers/PartidaIndividual.h"
 
     PartidaIndividual::PartidaIndividual(){}
-    PartidaIndividual::PartidaIndividual(int id, Usuario* user, DTFechaHora* fechaHora, int duracion, bool continua){
+    PartidaIndividual::PartidaIndividual(int id, Jugador* user, DTFechaHora* fechaHora, int duracion, bool continua){
         setID(id);
         setUsuario(user);
         setDTFechaHora(fechaHora);

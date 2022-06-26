@@ -1,13 +1,14 @@
 #include "./Datatypes/DTVideojuego.h"
 
         DTVideojuego::DTVideojuego(){}
-        DTVideojuego::DTVideojuego(string nombre, string descripcion, string empresa, int costo, map <string,DTCategoria*> categorias, int totalHoras){
+        DTVideojuego::DTVideojuego(string nombre, string descripcion, string empresa, int costo, map <string,DTCategoria*> categorias, int totalHoras, float puntaje){
             this->nombre = nombre;
             this->descripcion = descripcion;
             this->empresa = empresa;
             this->costo = costo;
             this->categorias = categorias;
             this->totalHoras = totalHoras;
+            this->puntaje = puntaje;
         }
         string DTVideojuego::getNombre(){
             return this->nombre;
@@ -51,11 +52,17 @@
         void DTVideojuego::setTotalHoras(int totalHoras){
             this->totalHoras=totalHoras;
         }
+        float DTVideojuego::getPuntaje(){
+            return this->puntaje;
+        }
+        void DTVideojuego::setPuntaje(float puntaje){
+            this->puntaje = puntaje;
+        }
         DTVideojuego::~DTVideojuego(){}
 
         //DTVideojuego(string nombre, string descripcion, string empresa, int costo, map <string,DTCategoria*> categorias, float totalHoras);
         ostream& operator <<(ostream& salida, DTVideojuego& dtv){
-            cout << "Nombre: " << dtv.nombre << " - Empresa desarrolladora: " << dtv.empresa << " - Costo: " << dtv.costo << " - Descripcion: " << dtv.descripcion << endl;
+            cout << "Nombre: " << dtv.nombre << " - Empresa desarrolladora: " << dtv.empresa << " - Costo: " << dtv.costo << " - Descripcion: " << dtv.descripcion << " - Puntaje: " << dtv.puntaje << " ☆" << endl;
             cout << "Categorias:" << endl;
             for(map<string,DTCategoria*>::iterator it = dtv.categorias.begin(); it != dtv.categorias.end(); it++)
                 cout << *(it->second) << endl;

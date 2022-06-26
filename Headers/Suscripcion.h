@@ -3,7 +3,7 @@
 #include <string>
 #include "../Datatypes/DTFechaHora.h"
 #include "TipoPago.h"
-#include "Usuario.h"
+#include "Jugador.h"
 
 
 using namespace std;
@@ -13,16 +13,16 @@ class Suscripcion{
 private:
     DTFechaHora fechaHora;
     TipoPago tipo;
-    Usuario* jugador;
+    Jugador* jugador;
 public:
     Suscripcion();
-    Suscripcion(DTFechaHora fechaHora, TipoPago tipo, Usuario* jugador);
+    Suscripcion(DTFechaHora fechaHora, TipoPago tipo, Jugador* jugador);
     DTFechaHora getDTFechaHora();
     void setDTFechaHora(DTFechaHora fechaHora);
     TipoPago getTipoPago();
     void setTipoPago(TipoPago tipo);
-    Usuario* getJugador();
-    void setJugador(Usuario* jugador);
+    Jugador* getJugador();
+    void setJugador(Jugador* jugador);
     ~Suscripcion();   
 };
 #endif

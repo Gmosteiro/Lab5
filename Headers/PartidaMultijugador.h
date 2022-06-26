@@ -10,7 +10,7 @@ class PartidaMultijugador: public Partida{
         int cantJugadores;
     public:
         PartidaMultijugador();
-        PartidaMultijugador(int id, Usuario* user, DTFechaHora* fechaHora, int duracion, bool transmitido, int cantJugadores);
+        PartidaMultijugador(int id, Jugador* user, DTFechaHora* fechaHora, int duracion, bool transmitido, int cantJugadores);
         bool getTransmitido();
         void setTransmitido(bool transmitido);
         int getCantJugadores();

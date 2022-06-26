@@ -15,9 +15,15 @@
         }
         return inserted;
     }
-    void CUsuario::datosComunes(string email, string pass){
+    bool CUsuario::datosComunes(string email, string pass){
+        bool retorno = false;
+        ManejadorUsuario* mu = ManejadorUsuario::getInstancia();
         this->email = email;
         this->pass = pass;
+        if(mu->existeUsuario(email))
+            retorno = true;
+
+        return retorno;
     }
     void CUsuario::datosEmpresa(string nomEmp){
         this->nomEmp = nomEmp;

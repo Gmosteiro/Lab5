@@ -12,10 +12,11 @@ class DTVideojuego{
         int costo;
         map <string,DTCategoria*> categorias;
         int totalHoras;
+        float puntaje;
         
     public:
         DTVideojuego();
-        DTVideojuego(string nombre, string descripcion, string empresa, int costo, map <string,DTCategoria*> categorias, int totalHoras);
+        DTVideojuego(string nombre, string descripcion, string empresa, int costo, map <string,DTCategoria*> categorias, int totalHoras, float puntaje);
         string getNombre();
         void setNombre(string nombre);
         string getDescripcion();
@@ -28,6 +29,8 @@ class DTVideojuego{
         void setCategorias(string id, DTCategoria* dtc);
         int getTotalHoras();
         void setTotalHoras(int totalHoras);
+        float getPuntaje();
+        void setPuntaje(float puntaje);
         ~DTVideojuego();
 
         friend ostream& operator <<(ostream&,DTVideojuego&);

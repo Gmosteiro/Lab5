@@ -14,7 +14,7 @@ class CUsuario: public ICUsuario{
         string email, pass, nomEmp, nickname, desc;
     public:
         bool altaUsuario();
-        void datosComunes(string email, string pass);
+        bool datosComunes(string email, string pass);
         void datosEmpresa(string nomEmp);
         bool datosJugador(string nickname, string desc);
         void cancelar();

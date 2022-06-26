@@ -1,7 +1,7 @@
 #include "./Headers/Videojuego.h"
 
     Videojuego::Videojuego(){}
-    Videojuego::Videojuego(string nombre, string desc, int costo, Usuario* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones, map<int,Partida*> partidas){
+    Videojuego::Videojuego(string nombre, string desc, int costo, Desarrollador* desarrollador, map<string,Categoria*> categorias, map<string,Suscripcion*> suscripciones, map<int,Partida*> partidas, map<string,Puntaje*> puntajes){
         this->nombre = nombre;
         this->desc = desc;
         this->costo = costo;
@@ -9,6 +9,7 @@
         this->categorias = categorias;
         this->suscripciones = suscripciones;
         this->partidas = partidas;
+        this->puntajes = puntajes;
     }
     string Videojuego::getNombre(){
         return this->nombre;
@@ -28,10 +29,10 @@
     void Videojuego::setCosto(int costo){
         this->costo = costo;
     }
-    Usuario* Videojuego::getDesarrollador(){
+    Desarrollador* Videojuego::getDesarrollador(){
         return this->desarrollador; //actulizated 7/6/22  nou room scape here
     }
-    void Videojuego::setDesarrollador(Usuario* desarrollador){
+    void Videojuego::setDesarrollador(Desarrollador* desarrollador){
         this->desarrollador = desarrollador;
     }
     map<string,Categoria*> Videojuego::getCategorias(){
@@ -51,6 +52,12 @@
     }
     void Videojuego::setPartidas(int id, Partida* par){
         this->partidas.insert({id, par});
+    }
+    map<string,Puntaje*> Videojuego::getPuntajes(){
+        return this->puntajes;
+    }
+    void Videojuego::setPuntajes(string mail, Puntaje* pun){
+        this->puntajes.insert({mail, pun});
     }
     DTVideojuego* Videojuego::getDTVideojuego(){
         
@@ -78,7 +85,17 @@
             }
         }
 
-        DTVideojuego* dt = new DTVideojuego(this->nombre,this->desc,des->getNomEmp(),this->costo, cat, horas);
+        float puntaje = 0;
+        int c = 0;
+        for(map<string,Puntaje*>::iterator it = this->puntajes.begin(); it != this->puntajes.end(); it++){
+            puntaje += it->second->getPuntaje();
+            c++;
+        }
+
+        if (puntaje != 0)
+             puntaje = puntaje/c;
+
+        DTVideojuego* dt = new DTVideojuego(this->nombre,this->desc,des->getNomEmp(),this->costo, cat, horas, puntaje);
         return dt;  
     }
 
@@ -98,5 +115,9 @@
 
         for(map<int,Partida*>::iterator it = this->partidas.begin(); it != this->partidas.end(); it++){
             this->partidas.erase(it);
+        }
+
+        for(map<string,Puntaje*>::iterator it = this->puntajes.begin(); it != this->puntajes.end(); it++){
+            this->puntajes.erase(it);
         }
     }  //destructor 

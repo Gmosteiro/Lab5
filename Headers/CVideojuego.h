@@ -12,11 +12,13 @@ class CVideojuego: public ICVideojuego{
     private:
         string nombre, desc;
         int costo;
+        int puntuacion;
         map<string, Categoria*> cat;
     public:
         DTVideojuego* verInformacionVideojuego();
         void eliminarVideojuego();
         bool agregarVideojuego();
+        void asignarPuntaje();
     
         void ingresarNombre(string nombre);
         void ingresarDescripcion(string desc);
@@ -28,6 +30,8 @@ class CVideojuego: public ICVideojuego{
         bool buscarJuegoDesarrollador();
         bool buscarJuego();
         list <DTPartida*> verPartidas();
+        void ingresarPuntuacion(int puntuacion);
+        
         void cancelar();
 };
 

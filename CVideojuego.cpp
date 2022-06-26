@@ -18,8 +18,26 @@
         ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
         map<string, Suscripcion*> sus;
         map<int, Partida*> par;
-        Videojuego* v = new Videojuego(nombre, desc, costo, s->getUser(), cat, sus, par);
+        map<string,Puntaje*> pun;
+        Desarrollador* des = dynamic_cast<Desarrollador*>(s->getUser());
+        Videojuego* v = new Videojuego(nombre, desc, costo, des, cat, sus, par, pun);
         return mv->agregarVideojuego(v);
+    }
+
+    void CVideojuego::asignarPuntaje(){
+        Sesion* s = Sesion::getInstancia();
+        Jugador* jug = dynamic_cast<Jugador*>(s->getUser());
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+
+        Videojuego* v = mv->getVideojuego(this->nombre);
+        
+        map<string,Puntaje*>::iterator it = v->getPuntajes().find(jug->getNick());    
+        if(it != v->getPuntajes().end()){
+            it->second->setPuntaje(this->puntuacion);
+        }else{
+            Puntaje* p = new Puntaje(this->puntuacion, jug);
+            v->setPuntajes(jug->getNick(), p);
+        }        
     }
 
     void CVideojuego::ingresarNombre(string nombre){
@@ -105,15 +123,8 @@
     }
 
     bool CVideojuego::buscarJuego(){
-        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
-        bool retorno = false;
-
-        Videojuego* v = mv->getVideojuego(this->nombre);
-
-        if(v!=NULL)
-            retorno = true;
-        
-        return retorno;
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();   
+        return mv->existeVideojuego(this->nombre);
     }
 
     list <DTPartida*> CVideojuego::verPartidas(){
@@ -131,6 +142,10 @@
             
         return retorno;
 
+    }
+
+    void CVideojuego::ingresarPuntuacion(int puntuacion){
+        this->puntuacion = puntuacion;
     }
     
     void CVideojuego::cancelar(){}

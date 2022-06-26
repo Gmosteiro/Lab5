@@ -5,6 +5,7 @@ void CSuscripcion::suscribirseAVideojuego(){
     
     ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
     Sesion* s = Sesion::getInstancia();
+    Jugador* jug = dynamic_cast<Jugador*>(s->getUser());
 
     Videojuego* vid = mv->getVideojuego(this->nombre);
 
@@ -12,7 +13,7 @@ void CSuscripcion::suscribirseAVideojuego(){
 	tm* timePtr = localtime(&t);    
     DTFechaHora *fecha = new DTFechaHora(timePtr->tm_mday, (timePtr->tm_mon+1), (timePtr->tm_year+1900), timePtr->tm_hour, timePtr->tm_min);
 
-    Suscripcion* sus = new Suscripcion(*fecha, this->tipo, s->getUser());
+    Suscripcion* sus = new Suscripcion(*fecha, this->tipo, jug);
 
     vid->setSuscripciones(s->getUser()->getEmail(),sus);
     }

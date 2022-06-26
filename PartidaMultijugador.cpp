@@ -1,6 +1,6 @@
 #include "./Headers/PartidaMultijugador.h"
     PartidaMultijugador::PartidaMultijugador(){}
-    PartidaMultijugador::PartidaMultijugador(int id, Usuario* user, DTFechaHora* fechaHora, int duracion, bool transmitido, int cantJugadores){
+    PartidaMultijugador::PartidaMultijugador(int id, Jugador* user, DTFechaHora* fechaHora, int duracion, bool transmitido, int cantJugadores){
         setID(id);
         setUsuario(user);
         setDTFechaHora(fechaHora);
