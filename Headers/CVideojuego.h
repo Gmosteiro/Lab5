@@ -19,6 +19,8 @@ class CVideojuego: public ICVideojuego{
         void eliminarVideojuego();
         bool agregarVideojuego();
         void asignarPuntaje();
+        list <Videojuego*> buscarPorCategoria();
+        list <DTVideojuego*> rankingVideojuegos(int opcion);
     
         void ingresarNombre(string nombre);
         void ingresarDescripcion(string desc);

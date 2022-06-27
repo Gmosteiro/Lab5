@@ -18,6 +18,8 @@ class ICVideojuego{
         virtual void eliminarVideojuego()=0;
         virtual bool agregarVideojuego()=0;
         virtual void asignarPuntaje()=0;
+        virtual list <Videojuego*> buscarPorCategoria()=0;
+        virtual list <DTVideojuego*> rankingVideojuegos(int opcion)=0;
 
         virtual void ingresarNombre(string nombre) = 0;
         virtual void ingresarDescripcion(string desc) = 0;

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 #include "./Headers/Fabrica.h"
 #include "./Headers/ICCategoria.h"
@@ -49,13 +51,30 @@ void leerString(string &aux){
         getline(cin,aux);
 }
 
+void firstLoad(){
+
+    system("clear");
+    cout << "loading experience...\n" << endl;
+
+    string hello = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n@@@@@@@@@@@@@@@@(**,,,,,,,,,,,,,**#@@@@@@@@@@@@@@@\n@@@@@@@@@@@@*,,,,,,,,,,,,,,,,,,,,,,,,*/@@@@@@@@@@@\n@@@@@@@@@/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,%@@@@@@@@\n@@@@@@@/,,,,,,,,,,,,,,,,,,,@@@@@@@@@(,,,,,,%@@@@@@\n@@@@@@,,,,,,,,,,,,,,,,,,,@@%,,&@@*,,@@&,,,,,*@@@@@\n@@@@@,,,,,,,,,,,,,,,,,,,@@.,@@@@@@@/,@@/,,,,,,@@@@\n@@@@,,,,,,,,,,,,,,,,,,,@@@.,@@@@@@@,,@@*,,,,,,,@@@\n@@@&,,,,,,,,,,,,,,,,,@@@@@@@,,,%(,,#@@*,,,,,,,,@@@ debadelai no play no pary\n@@@@@@@@%,,,,,,,,,,@@@@@@@@@@@@@@@@@,,,,,,,,,,,@@@\n@@@&@@@@@@@@@@@@@@@@@@@@@@@@@,,,,,,,,,,,,,,,,,,@@@\n@@@@,,,,(@@@@@@@@@@&,@@@@(,,,,,,,,,,,,,,,,,,,,,@@@\n@@@@@,,,,,,,@@@@@@@(,@@@,,,,,,,,,,,,,,,,,,,,,,@@@@\n@@@@@@,,,,,,,@@@@##@@@@,,,,,,,,,,,,,,,,,,,,,,@@@@@\n@@@@@@@(,,,,,,,,.**,,,,,,,,,,,,,,,,,,,,,,,,%@@@@@@\n@@@@@@@@@#,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,%@@@@@@@@\n@@@@@@@@@@@&*,,,,,,,,,,,,,,,,,,,,,,,,,#@@@@@@@@@@@\n@@@@@@@@@@@@@@@&#,,,,,,,,,,,,,,,,,%&@@@@@@@@@@@@@@\n@@@@@@@@@@@@@@@@@@@@@@@@&&&@@@@@@@@@@@@@@@@@@@@@@@\n\n";
+        int x=0;
+        while ( hello[x] != '\0')
+            {
+            cout << hello[x];
+            std::chrono::milliseconds timespan(5); // or whatever
+            std::this_thread::sleep_for(timespan);
+            x++;
+        };
+
+}
+
 
 void menu() {
-    cout << "______________________________________________________\n" << endl;
-    cout << "_________________VIDEOJUEGOS ANASHEyS_________________\n" << endl;
-    cout << "______________________________________________________\n" << endl;
+    cout << "\t\t\t______________________" << endl;
+    cout << "\n\t\t\t_VIDEOJUEGOS ANASHEyS_" << endl;
+    cout << "\t\t\t______________________\n\n" << endl;
     cout << "1). Alta Usuario" << endl;
-    cout << "2). Iniciar sesion" << endl;
+    cout << "2). Iniciar Sesión" << endl;
     cout << "3). Cerrar Sesión" << endl;
     cout << "4). Agregar Categoría" << endl;
     cout << "5). Agregar Videojuego" << endl;
@@ -78,9 +97,9 @@ void menuAltaDeUsuario() {
     
     IContUsuario = Factorio->getICUsuario();
     
-    cout << "----------------------------------------------" << endl;
-    cout << "______________Alta de usuario_________________" << endl;
-    cout << "----------------------------------------------" << endl;
+    cout << "----------------" << endl;
+    cout << "- Alta Usuario -" << endl;
+    cout << "----------------\n" << endl;
     try
     {
         string pass, email, empresa, nickname, descripcion;
@@ -88,43 +107,43 @@ void menuAltaDeUsuario() {
         int opcion = 1;
         bool a = false;
 
-        cout<< "Ingrese email: \n"<< endl;
+        cout<< "Ingrese email: ";
         leerString(email);
-        cout<< "Ingrese contraseña: \n"<< endl;
+        cout<< "Ingrese contraseña: ";
         leerString(pass);
         
         while(IContUsuario->datosComunes(email, pass)){
-            cout<< "Ya existe un usuario con ese email, ingrese otro:"<< endl;
+            cout<< "Ya existe un usuario con ese email, ingrese otro: ";
             leerString(email);
         }
        
-        cout << "Es desarrollador(1) o Jugador (2)? \n"; //editado 13/06/2022
+        cout << "Es Desarrollador(1) o Jugador (2): "; //editado 13/06/2022
         cin >> tipo;
 
         switch (tipo)
         {
             case 1:
                 {                
-                    cout << "Ingrese nombre de empresa: \n";
+                    cout << "Ingrese el nombre de empresa: ";
                     leerString(empresa);
                     IContUsuario->datosEmpresa(empresa);
                 }
                 break;        
             case 2:
                 {                
-                    cout << "Ingrese nickname \n";
+                    cout << "Ingrese su nickname: ";
                     leerString(nickname);
-                    cout << "Ingrese descripcion \n";
+                    cout << "Ingrese la descripcion: ";
                     leerString(descripcion);
                     a = IContUsuario->datosJugador(nickname,descripcion);
                     while(a)
                     {                                            
-                        cout << "Ya existe un jugador con ese nickname! \n";
-                        cout << "Desea cancelar(0) o reintentar (1) \n";
+                        cout << "Ya existe un jugador con ese nickname!" << endl;
+                        cout << "Desea cancelar(0) o reintentar (1)" << endl;
                         cin >> opcion;
                         if(opcion !=0)
                         {
-                            cout << "Ingrese el nuevo nickname \n";
+                            cout << "Ingrese el nuevo nickname: ";//nasheeee
                             leerString(nickname);
                             a = IContUsuario->datosJugador(nickname,descripcion);
                         }
@@ -143,16 +162,20 @@ void menuAltaDeUsuario() {
                 break;
         }
 
-        cout << "Acepta(1) o Rechaza(0)?\n";
+        cout << "Aceptar(1) o Rechazar(0): ";
         cin >> tipo;
         
         if(tipo == 1){
             IContUsuario->altaUsuario();
             system("clear");
-            cout <<"Usuario ingresado \n" << endl;        
+            cout << "------------------" << endl;
+            cout << "- Usuario creado -" << endl;
+            cout << "------------------\n" << endl;       
         }else{
             system("clear"); 
-            cout << "Operacion cancelada\n" << endl;   
+            cout << "-----------------------" << endl;
+            cout << "- Operación cancelada -" << endl;
+            cout << "-----------------------\n" << endl;
             IContUsuario->cancelar();
         }
     }
@@ -172,39 +195,44 @@ void menuIniciarSesion() {
     Sesion* ses = Sesion::getInstancia();
 
     if(ses->getEstado()){
-        cout << "----------------------------------------------" << endl;
-        cout << "----------Ya hay una sesion iniciada----------" << endl;
-        cout << "----------------------------------------------" << endl;
+        system("clear");
+        cout << "------------------------------" << endl;
+        cout << "- Ya hay una sesión iniciada -" << endl;
+        cout << "------------------------------\n" << endl;
         
     }else{
         
-        cout << "----------------------------------------------" << endl;
-        cout << "________________Iniciar sesión________________" << endl;
-        cout << "----------------------------------------------" << endl;
+        system("clear");
+        cout << "------------------" << endl;
+        cout << "- Iniciar Sesión -" << endl;
+        cout << "------------------\n" << endl;
         
         
-        cout<< "Ingrese email: \n"<< endl;
+        cout<< "Ingrese email: ";
         leerString(email);
         IContSesion->ingresaEmail(email);
-        cout<< "Ingrese contraseña: \n"<< endl;
+        cout<< "Ingrese contraseña: ";
         leerString(pass);
         contra = IContSesion->verificarPass(pass);
 
         if(IContSesion->iniciarSesion())
         {
-            cout << "------------------------------------------" << endl;
-            cout << "Sesion iniciada ANASHEY" << endl; //*GRITO EXCLAMANDO* 
-            cout << "------------------------------------------" << endl;
+            system("clear");
+            cout << "---------------------------------" << endl;
+            cout << "- Sesión iniciada correctamente -" << endl;
+            cout << "---------------------------------\n" << endl;
             
         }else
         {
-            cout << "------------------------------------------" << endl;
-            cout << "Contraseña o usuario incorrecto anasheyn't!\n" << endl;//14/06/22
-            cout << "Reintentar(1), Cancelar(0)" << endl;
-            cout << "------------------------------------------" << endl;            
+            cout << "Contraseña o usuario incorrecto" << endl;//14/06/22
+            cout << "Reintentar(1), Cancelar(0): ";       
             cin >> opcion;
             if(opcion==0)
             {
+                system("clear");
+                cout << "-----------------------" << endl;
+                cout << "- Operacion cancelada -" << endl;
+                cout << "-----------------------\n" << endl;
                 IContSesion->cancelar();
             }else
             {   
@@ -220,13 +248,13 @@ void menuCerrarSesion() {
     IContSesion = Factorio->getICSesion();
 
     if(IContSesion->cerrarSesion()){
-        cout << "----------------------------------------------" << endl;
-        cout << "________________Sesión cerrada________________" << endl;
-        cout << "----------------------------------------------" << endl;   
+        cout << "------------------" << endl;
+        cout << "- Sesión cerrada -" << endl;
+        cout << "------------------\n" << endl;
     }else{ 
-        cout << "----------------------------------------------" << endl;
-        cout << "----------No hay una sesión iniciada----------" << endl;
-        cout << "----------------------------------------------" << endl;    
+        cout << "------------------------------" << endl;
+        cout << "- No hay una sesión iniciada -" << endl;
+        cout << "------------------------------\n" << endl;
     }
 
 }
@@ -250,22 +278,29 @@ void menuAgregarCategoria() {
     map<string, DTCategoria*> categorias;
 
     if(!esDesarrollador()){
-        cout << "----------------------------------------------" << endl;
-        cout << "----------El usuario no es desarrollador----------" << endl;
-        cout << "----------------------------------------------" << endl;    
+        cout << "-----------------------" << endl;
+        cout << "- No es desarrollador -" << endl;
+        cout << "-----------------------\n" << endl;
     }else{
 
+        system("clear");
+        cout << "---------------------" << endl;
+        cout << "- Agregar Categoría -" << endl;
+        cout << "---------------------\n" << endl;
+        cout << "-------------------------" << endl;
+        cout << "- Categorias existentes -" << endl;
+        cout << "-------------------------" << endl;
         categorias = IContCategoria->listarCategorias();
 
         for(map<string,DTCategoria*>::iterator it = categorias.begin(); it != categorias.end(); it++){
-            cout << *(it->second) << "\n" << endl;
+            cout << *(it->second) << endl;
         }
     
-        cout<< "Ingrese genero: \n"<< endl;
+        cout<< "\nIngrese genero: ";
         leerString(genero);
-        cout<< "Ingrese plataforma: \n"<< endl;
+        cout<< "Ingrese plataforma: ";
         leerString(plataforma);
-        cout<< "Ingrese descripcion: \n"<< endl;
+        cout<< "Ingrese descripcion: ";
         leerString(desc);
 
         IContCategoria->ingresarGenero(genero);
@@ -273,7 +308,7 @@ void menuAgregarCategoria() {
         IContCategoria->ingresarDesc(desc);
 
         int caso;
-        cout << "Acepta(1) o Rechaza(0)?\n";
+        cout << "Acepta(1) o Rechaza(0): ";
         cin >> caso;
         
         if(caso == 1)
@@ -281,18 +316,24 @@ void menuAgregarCategoria() {
             if(IContCategoria->agregarCategoria())
             {
                 system("clear");
-                cout <<"Categoria ingresada\n" << endl; 
+                cout << "----------------------" << endl;
+                cout << "- Categoria agregada -" << endl;
+                cout << "----------------------\n" << endl;
             }
             else
             {
                 system("clear");
-                cout <<"Ya existe esa categoria, operacion cancelada\n" << endl; 
+                cout << "-----------------------------------------------" << endl;
+                cout << "- Ya existe la categoria, operación cancelada -" << endl;
+                cout << "-----------------------------------------------\n" << endl;
             }       
         }
         else
         {
             system("clear"); 
-            cout << "Operacion cancelada\n" << endl;   
+            cout << "-----------------------" << endl;
+            cout << "- Operación cancelada -" << endl;
+            cout << "-----------------------\n" << endl;
             IContUsuario->cancelar();
         }
     }
@@ -309,29 +350,32 @@ void menuAgregarVideojuego() {
     map<string, DTCategoria*> dtcatag;
     
     if(!esDesarrollador()){
-        cout << "----------------------------------------------" << endl;
-        cout << "----------El usuario no es desarrollador----------" << endl;
-        cout << "----------------------------------------------" << endl;    
+        cout << "-----------------------" << endl;
+        cout << "- No es desarrollador -" << endl;
+        cout << "-----------------------\n" << endl;
     }else{
 
         dtcat = IContCategoria->listarCategorias();
 
         if(dtcat.empty()){
             system("clear");
-            cout << "-------------------------------------------------------" << endl;
-            cout << "----------No existen categorias en el sistema----------" << endl;//Hoy es  16/06/22
-            cout << "-------------------------------------------------------" << endl;    
+            cout << "---------------------------------------" << endl;
+            cout << "- No existen categorias en el sistema -" << endl;//Hoy es  16/06/22
+            cout << "---------------------------------------" << endl;    
         }else{
             //xd
             string nombre, descripcion, id_cat;
             int costo;
 
             system("clear");
-            cout<< "Ingrese Nombre del Videojuego: \n"<< endl;
+            cout << "----------------------" << endl;
+            cout << "- Agregar Videojuego -" << endl;
+            cout << "----------------------\n" << endl;
+            cout<< "Ingrese nombre: ";
             leerString(nombre);
-            cout<< "Ingrese descripcion: \n"<< endl;
+            cout<< "Ingrese descripcion: ";
             leerString(descripcion);
-            cout<< "Costo: \n"<< endl;
+            cout<< "Costo: ";
             cin >> costo;
 
             IContVideojuego->ingresarNombre(nombre);
@@ -341,15 +385,16 @@ void menuAgregarVideojuego() {
             
             int stop = 1;
             while (stop!=0){
-                    cout << "----------------------------------------------" << endl;
-                    cout << "------------Categorias del sistema------------" << endl;
-                    cout << "----------------------------------------------" << endl;   
+                    system("clear");
+                    cout << "-------------------------" << endl;
+                    cout << "- Listado de categorias -" << endl;
+                    cout << "-------------------------" << endl;   
 
                     for(map<string,DTCategoria*>::iterator it = dtcat.begin(); it != dtcat.end(); it++){
-                        cout << *(it->second) << "\n" << endl;
+                        cout << *(it->second) << endl;
                     }
                         
-                    cout<< "Seleccione la categoria: \n"<< endl;
+                    cout<< "\nSeleccione la categoria: ";
                     leerString(id_cat);
 
                 if(IContVideojuego->ingresarCategoria(id_cat)){
@@ -357,56 +402,55 @@ void menuAgregarVideojuego() {
                     DTCategoria* dta = new DTCategoria(id_cat);
                     dtcatag.insert({id_cat, dta});
                     
-                    system("clear");
-                    cout << "----------------------------------------------" << endl;
-                    cout << "--------------Categoria agregada--------------" << endl;  // que si =)
-                    cout << "----------------------------------------------\n" << endl;   
+                    cout << "\n----------------------" << endl;
+                    cout << "- Categoria agregada -" << endl;  // que si =)
+                    cout << "----------------------\n" << endl;   
 
-                    cout<< "Quiere ingresar otra categoria? \n"<< endl;
-                    cout<< " Si(1) No(0)  \n"<< endl;
+                    cout<< "Quiere ingresar otra categoria?"<< endl;
+                    cout<< "Si(1) No(0): ";
                     cin >> stop;    
                 }else{
-                    system("clear");
-                    cout << "---------------------------------------------------" << endl;
-                    cout << "-----No existe la categoria, o ya fue agregada-----" << endl;
-                    cout << "---------------------------------------------------\n" << endl;
+                    cout << "\n---------------------------------------------" << endl;
+                    cout << "- No existe la categoria, o ya fue agregada -" << endl;
+                    cout << "---------------------------------------------\n" << endl;
 
-                    cout<< "Quiere ingresar otra categoria? \n"<< endl;
-                    cout<< " Si(1) No(0)  \n"<< endl;
+                    cout<< "Quiere ingresar otra categoria?"<< endl;
+                    cout<< "Si(1) No(0): ";
                     cin >> stop;
                 }
             }
 
-            cout << "---------------------------------------------" << endl;
-            cout << "----------Informacion de videojuego----------" << endl;
-            cout << "---------------------------------------------\n" << endl;   
+            system("clear");
+            cout << "-----------------------------" << endl;
+            cout << "- Informacion de videojuego -" << endl;
+            cout << "-----------------------------\n" << endl;   
 
-            cout << "Nombre: " << nombre << "\n" << endl;
-            cout << "Descripcion: " << descripcion << "\n" << endl;
-            cout << "Costo: " << costo << "\n" << endl;
-            cout << "Email de desarrolador: " << ses->getUser()->getEmail() << "\n" << endl;
+            cout << "Nombre: " << nombre << endl;
+            cout << "Descripcion: " << descripcion << endl;
+            cout << "Costo: " << costo << endl;
+            cout << "Email de desarrolador: " << ses->getUser()->getEmail() << endl;
             cout << "Categorias: " << "\n" << endl;
             
             for(map<string,DTCategoria*>::iterator it = dtcatag.begin(); it != dtcatag.end(); it++){
-                        cout << *(it->second) << "\n" << endl;
+                        cout << *(it->second) << endl;
             }
-            cout<< "Acepta la creacion del videojuego? \n"<< endl;
-            cout<< "Si(1) No(0)  \n"<< endl;
+            cout<< "\nAcepta la creacion del videojuego?"<< endl;
+            cout<< "Si(1) No(0): ";
             cin >> stop; 
             if(stop==0){
                 IContVideojuego->cancelar();
             }else{
                 if(IContVideojuego->agregarVideojuego()){
                     system("clear");
-                    cout << "---------------------------------------------" << endl;
-                    cout << "------Videojuego agregado correctamente------" << endl;
-                    cout << "---------------------------------------------\n" << endl;  
+                    cout << "-------------------------------------" << endl;
+                    cout << "- Videojuego agregado correctamente -" << endl;
+                    cout << "-------------------------------------\n" << endl;  
                     
                 }else{
                     system("clear");
-                    cout << "--------------------------------------------------------" << endl;
-                    cout << "--------- No se puedo agregar el videojuego :c ---------" << endl;
-                    cout << "--------------------------------------------------------\n" << endl;   
+                    cout << "-------------------------------------" << endl;
+                    cout << "- No se puedo agregar el videojuego -" << endl;
+                    cout << "-------------------------------------\n" << endl;   
                 }
            }
       }
@@ -427,9 +471,9 @@ void menuSuscribirseVideojuego(){
         TipoPago tipo;
 
         if(!esJugador()){
-            cout << "----------------------------------------------" << endl;
-            cout << "----------El usuario no es jugador----------" << endl;
-            cout << "----------------------------------------------" << endl;    
+            cout << "-----------------" << endl;
+            cout << "- No es jugador -" << endl;
+            cout << "-----------------\n" << endl;
         }else{
 
             jugSus = IContSuscripcion->listarSuscripcionesJugador();
@@ -437,37 +481,37 @@ void menuSuscribirseVideojuego(){
 
             if(restoSus.empty()){
                 system("clear");
-                cout << "--------------------------------------------------------------------" << endl;
-                cout << "----------No existen videojuegos o ya se suscribió a todos----------" << endl;
-                cout << "--------------------------------------------------------------------" << endl;    
+                cout << "----------------------------------------------------" << endl;
+                cout << "- No existen videojuegos o ya se suscribió a todos -" << endl;
+                cout << "----------------------------------------------------\n" << endl;    
             }else{
 
                 system("clear");
-                cout << "-------------------------------------------------------" << endl;
-                cout << "---------------- Suscribirse a videojugo --------------" << endl;
-                cout << "-------------------------------------------------------\n" << endl; //debe haber un videojuego
+                cout << "---------------------------" << endl;
+                cout << "- Suscribirse a videojugo -" << endl;
+                cout << "---------------------------\n" << endl; //debe haber un videojuego
                 
-                cout << "---------------- Suscripciones activas ----------------\n" << endl;
+                cout << "- Suscripciones activas -\n" << endl;
 
                 for(map<string,Videojuego*>::iterator it = jugSus.begin(); it != jugSus.end(); it++){
-                    cout << "   Nombre: " << it->second->getNombre() << " - Costo: " << it->second->getCosto() << "\n" << endl;
+                    cout << "   Nombre: " << it->second->getNombre() << " - Costo: " << it->second->getCosto() << endl;
                 }
         
-                cout << "---------------- Videojuegos sin suscripcion ----------------\n" << endl;
+                cout << "\n- Videojuegos sin suscripcion -\n" << endl;
 
                 for(map<string,Videojuego*>::iterator it = restoSus.begin(); it != restoSus.end(); it++){
-                    cout << "   Nombre: " << it->second->getNombre() << " - Costo: " << it->second->getCosto() << "\n" << endl;
+                    cout << "   Nombre: " << it->second->getNombre() << " - Costo: " << it->second->getCosto() << endl;
                 }
 
-                cout<< "Seleccione el videojuego: \n"<< endl;
+                cout<< "\nSeleccione el videojuego: ";
                 leerString(nombre);
 
                 while(!IContSuscripcion->nombreVideojuego(nombre)){
-                    cout<< "Ingrese un nombre correcto: \n"<< endl;
+                    cout<< "Ingrese un nombre correcto: ";
                     leerString(nombre);
                 }
 
-                cout<< "Seleccione el metodo de pago (DEBITO (0) o CREDITO (1)): \n"<< endl; //VICHAR CON EL LAB VIEJO
+                cout<< "Seleccione el metodo de pago [DEBITO (0) o CREDITO (1)]: "; //VICHAR CON EL LAB VIEJO
                 cin >> t;
 
                 switch (t)
@@ -483,19 +527,23 @@ void menuSuscribirseVideojuego(){
 
                 IContSuscripcion->tipoPago(tipo);
 
-                cout<< "Estimado Jugador desea confirmar la suscripcion anashey? \n"<< endl;
-                cout<< "Si(1) No(0)  \n"<< endl;
+                cout<< "Confirma la suscripción?"<< endl;
+                cout<< "Si(1) No(0): ";
                 int opcion = 0;
                 cin >> opcion; 
                 if(opcion==0){
                     IContSuscripcion->cancelar();
+                    system("clear");
+                    cout << "-----------------------" << endl;
+                    cout << "- Operación cancelada -" << endl;
+                    cout << "-----------------------\n" << endl;
                 }else{
 
                     IContSuscripcion->suscribirseAVideojuego();
                     system("clear");
-                    cout << "-------------------------------------------------" << endl;
-                    cout << "------Suscrito a videojuego de forma anashe------" << endl;
-                    cout << "-------------------------------------------------\n" << endl;        
+                    cout << "-------------------------" << endl;
+                    cout << "- Suscrito exitosamente -" << endl;
+                    cout << "--------------------------\n" << endl;        
                 } 
                     
                 }
@@ -509,19 +557,19 @@ void datosPrueba() {
     IContUsuario = Factorio->getICUsuario();
 
     IContUsuario->datosComunes("des","des");
-    IContUsuario->datosEmpresa("empresa");
+    IContUsuario->datosEmpresa("CAPCON'T");
     IContUsuario->altaUsuario();
 
     IContUsuario = Factorio->getICUsuario();
 
     IContUsuario->datosComunes("des2","des2");
-    IContUsuario->datosEmpresa("empresa");
+    IContUsuario->datosEmpresa("KONAMIN'T");
     IContUsuario->altaUsuario();
 
     IContUsuario = Factorio->getICUsuario();
 
     IContUsuario->datosComunes("jug", "jug");
-    IContUsuario->datosJugador("jug", "jug");
+    IContUsuario->datosJugador("NoobMaster69", "guiño guiño, codo codo");
 
     IContUsuario->altaUsuario();
 
@@ -606,7 +654,10 @@ void datosPrueba() {
     
     IContSesion->cerrarSesion();
 
-    cout<< "Se cargo todo anashe\n"<< endl;
+    system("clear");
+    cout << "--------------------------------" << endl;
+    cout << "- Carga de datos base completa -" << endl;
+    cout << "--------------------------------\n" << endl;
 
 }
 
@@ -623,39 +674,40 @@ void menuIniciarPartida(){//22/06/22
     IContPartida = Factorio->getICPartida();
 
     if(!esJugador()){
-            cout << "----------------------------------------------" << endl;
-            cout << "----------El usuario no es jugador----------" << endl;//un hambre
-            cout << "----------------------------------------------" << endl;    
+            system("clear");
+            cout << "-----------------" << endl;
+            cout << "- No es jugador -" << endl;
+            cout << "-----------------\n" << endl;       
         }else{
             juegosU = IContSuscripcion->listarSuscripcionesJugador();
             if(juegosU.empty()){
                 system("clear");
-                cout << "--------------------------------------------------------------------" << endl;
-                cout << "---------------El jugador no tiene suscripciones activas------------" << endl;
-                cout << "--------------------------------------------------------------------" << endl;    
+                cout << "----------------------------------" << endl;
+                cout << "- No tiene suscripciones activas -" << endl;
+                cout << "----------------------------------\n" << endl;       
             }else{
                 
-                   cout << "---------------- Suscripciones activas ----------------\n" << endl;
+                   cout << "- Suscripciones activas -\n" << endl;
 
                     for(map<string,Videojuego*>::iterator it = juegosU.begin(); it != juegosU.end(); it++){
-                        cout << "   Nombre: " << it->second->getNombre() << "\n" << endl;
+                        cout << "   - " << it->second->getNombre() << endl;
                     }
 
-                cout<< "Seleccione el videojuego: \n"<< endl;
+                cout<< "\nSeleccione el videojuego: ";
                 leerString(juego);
 
                 while(!IContPartida->selectVideojuego(juego, juegosU)){
-                    cout<< "Ingrese el nombre de un videojuego suscrito: \n"<< endl;
+                    cout<< "Ingrese un nombre correcto: ";
                     leerString(juego);
                 }
 
-    cout << "Seleccione el tipo de partida: 1- Individual; 2- Multijugador\n" << endl;
+    cout << "Seleccione el tipo de partida: 1- Individual; 2- Multijugador: ";
     cin >> tipo;
     switch (tipo)
     {
         case 1:
         IContPartida->ingresarTipoPartida(S);
-        cout << "\nEs una continuación? 1- Si; 2- No\n";
+        cout << "Es una continuación? 1- Si; 2- No: ";
         cin >> conf;
         if(conf == 1){
             continua = true;
@@ -668,9 +720,9 @@ void menuIniciarPartida(){//22/06/22
         break;
         case 2:
         IContPartida->ingresarTipoPartida(M);
-        cout << "\nIngrese la cantidad de jugadores:\n";
+        cout << "Ingrese la cantidad de jugadores: ";
         cin >> cantParticipantes;
-        cout << "\nFue transmitida en vivo? 1- Si; 2- No\n";
+        cout << "Fue transmitida en vivo? 1- Si; 2- No: ";
         cin >> conf;
         if(conf == 1){
             enVivo = true;
@@ -681,25 +733,29 @@ void menuIniciarPartida(){//22/06/22
         break;
     }
 
-    cout << "\nIngrese la duración de la partida:\n";
+    cout << "Ingrese la duración de la partida: ";
     cin >> duracion;
 
     IContPartida->ingresarDuracion(duracion);
 
-    cout<< "Estimado Jugador desea confirmar la partida? \n"<< endl;
-    cout<< "Si(1) No(0)  \n"<< endl;
+    cout<< "Confirma la partida"<< endl;
+    cout<< "Si(1) No(0): ";
     
     cin >> opcion; 
     if(opcion==0){
         IContPartida->cancelar();
+        system("clear");
+        cout << "-----------------------" << endl;
+        cout << "- Operación cancelada -" << endl;
+        cout << "-----------------------\n" << endl; 
     }else{
         
         IContPartida->iniciarPartida();
         
         system("clear");
-        cout << "---------------------------------------------" << endl;
-        cout << "--------------Partida ingresada--------------" << endl;
-        cout << "---------------------------------------------\n" << endl;  
+        cout << "---------------------" << endl;
+        cout << "- Partida ingresada -" << endl;
+        cout << "---------------------\n" << endl;  
 
     }
     }
@@ -714,42 +770,50 @@ void menuMostrarInformacion(){
     
     if(ses->getEstado()){
 
+        system("clear");
+        cout << "---------------------------------" << endl;
+        cout << "- Ver informacion de videojuego -" << endl;
+        cout << "---------------------------------\n" << endl;  
+
         list <string> juegos = IContVideojuego->listarVideojuegos();
 
         if(!juegos.empty()){
 
+            cout << "- Videojuegos -" << endl;
+
             for(list<string>::iterator it = juegos.begin(); it != juegos.end(); it++){
-                cout << it->data() << endl;
+                cout << "   - " << it->data() << endl;
             }
 
             string juego;
-            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            cout<< "\nSeleccione el videojuego: ";
             leerString(juego);
             IContVideojuego->ingresarNombre(juego);
 
             DTVideojuego* dt = IContVideojuego->verInformacionVideojuego(); 
             while(dt==NULL){
-                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                cout<< "Seleccione un nombre valido: ";
                 leerString(juego);
                 IContVideojuego->ingresarNombre(juego);
                 dt = IContVideojuego->verInformacionVideojuego();
             }
-
+            
+            system("clear");
             cout << *(dt) << endl;
 
             
         }else{
 
             system("clear");
-            cout << "----------------------------------------------------------------------" << endl;
-            cout << "------------------------- No existen videojuegos ---------------------" << endl;
-            cout << "----------------------------------------------------------------------" << endl; 
+            cout << "--------------------------" << endl;
+            cout << "- No existen videojuegos -" << endl;
+            cout << "--------------------------\n" << endl;  
         }   
     }else{
         system("clear");
-        cout << "------------------------------------------------------------------------" << endl;
-        cout << "---------------------------- Debe iniciar sesion ------------------------" << endl;
-        cout << "-------------------------------------------------------------------------" << endl;    
+        cout << "------------------------------" << endl;
+        cout << "- No hay una sesión iniciada -" << endl;
+        cout << "------------------------------\n" << endl;   
     }
     
 }
@@ -764,27 +828,38 @@ void eliminarVideojuego(){
 
         if(!juegos.empty()){
 
+            system("clear");
+            cout << "-----------------------" << endl;
+            cout << "- Eliminar Videojuego -" << endl;
+            cout << "-----------------------\n" << endl;  
+
+            cout << "- Videjuegos registrados por usted -" << endl;
+
             for(list<string>::iterator it = juegos.begin(); it != juegos.end(); it++){
-                cout << it->data() << endl;
+                cout << "   - " << it->data() << endl;
             }
 
             string juego;
-            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            cout<< "\nSeleccione el videojuego: ";
             leerString(juego);
             IContVideojuego->ingresarNombre(juego);
             
             while(!IContVideojuego->buscarJuegoDesarrollador()){
-                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                cout<< "Seleccione un nombre valido: ";
                 leerString(juego);
                 IContVideojuego->ingresarNombre(juego);
             }
             
-            cout << "¿Esta seguro de eliminar?" << endl;
-            cout<< "Si(1) No(0)  \n"<< endl;
+            cout << "¿Quiere eliminar " << juego << "?" << endl;
+            cout<< "Si(1) No(0): ";
             int opcion;
             cin >> opcion; 
             if(opcion==0){
                 IContVideojuego->cancelar();
+                system("clear");
+                cout << "-----------------------" << endl;
+                cout << "- Operación cancelada -" << endl;
+                cout << "-----------------------\n" << endl;
             }else{
                 
                 IContVideojuego->eliminarVideojuego();
@@ -823,28 +898,36 @@ void menuAsignarPuntaje(){
 
         if(!juegos.empty()){
 
+            system("clear");
+            cout << "--------------------------------" << endl;
+            cout << "- Asignar puntaje a videojuego -" << endl;
+            cout << "--------------------------------\n" << endl;  
+
+            cout << "- Videojuegos del sistema -" << endl;
+
             for(list<Videojuego*>::iterator it = juegos.begin(); it != juegos.end(); it++){
-                cout << "Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
+                cout << "   - Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
             }
 
             string juego;
-            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            cout<< "\nSeleccione el videojuego: ";
             leerString(juego);
             IContVideojuego->ingresarNombre(juego);
             
             while(!IContVideojuego->buscarJuego()){
-                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                cout<< "Seleccione un videojuego valido: ";
                 leerString(juego);
                 IContVideojuego->ingresarNombre(juego);
             }
 
             int puntuacion = 1;
-            cout << "\nSeleccione su puntuacion (desde 1 a 5): \n"<< endl;
+            cout << "Seleccione su puntuacion (desde 1 a 5): ";
             cin >> puntuacion;
             
             IContVideojuego->ingresarPuntuacion(puntuacion);
             IContVideojuego->asignarPuntaje();
 
+            system("clear");
             cout << "--------------------" << endl;
             cout << "- Puntaje asignado -" << endl;
             cout << "--------------------\n" << endl;  
@@ -852,6 +935,7 @@ void menuAsignarPuntaje(){
 
         }else{
 
+            system("clear");
             cout << "-----------------------------" << endl;
             cout << "- No hay juegos registrados -" << endl;
             cout << "-----------------------------\n" << endl;  
@@ -859,8 +943,9 @@ void menuAsignarPuntaje(){
         }
 
     }else{
+        system("clear");
         cout << "-----------------" << endl;
-        cout << "- No es Jugador -" << endl;
+        cout << "- No es jugador -" << endl;
         cout << "-----------------\n" << endl;  
     }
 
@@ -876,24 +961,35 @@ void menuCancelarSuscripcion(){
 
         if(!jugSus.empty()){
 
+            system("clear");
+            cout << "-------------------------------------" << endl;
+            cout << "- Cancelar suscripción a videojuego -" << endl;
+            cout << "-------------------------------------\n" << endl;  
+
+            cout << "- Videojuegos a los que está suscrito -" << endl;
+
             for(map<string,Videojuego*>::iterator it = jugSus.begin(); it != jugSus.end(); it++){
-                cout << it->second->getNombre() << endl;
+                cout << "   - " << it->second->getNombre() << endl;
             }
 
             string nombre;
-            cout<< "Seleccione el videojuego: \n"<< endl;
+            cout<< "\nSeleccione el videojuego: ";
             leerString(nombre);
 
             while(!IContSuscripcion->nombreVideojuegoSuscrito(nombre)){
-                cout<< "Ingrese un nombre correcto: \n"<< endl;
+                cout<< "Ingrese un nombre correcto: ";
                 leerString(nombre);
             }
             
             cout << "¿Esta seguro de cancelar su suscripcion?" << endl;
-            cout<< "Si(1) No(0)  \n"<< endl;
+            cout<< "Si(1) No(0): ";
             int opcion;
             cin >> opcion; 
             if(opcion==0){
+                system("clear");
+                cout << "-----------------------" << endl;
+                cout << "- Operación cancelada -" << endl;
+                cout << "-----------------------\n" << endl;  
                 IContSuscripcion->cancelar();
             }else{
                 
@@ -908,6 +1004,7 @@ void menuCancelarSuscripcion(){
 
         }else{
 
+            system("clear");
             cout << "----------------------------------------" << endl;
             cout << "- No esta suscrito a ningun videojuego -" << endl;
             cout << "----------------------------------------\n" << endl;  
@@ -915,6 +1012,7 @@ void menuCancelarSuscripcion(){
         }
 
     }else{
+        system("clear");
         cout << "-----------------" << endl;
         cout << "- No es jugador -" << endl;
         cout << "-----------------\n" << endl;  
@@ -922,9 +1020,103 @@ void menuCancelarSuscripcion(){
 
 }
 
-void menuBuscarVideojuegoCategoria(){}
+void menuBuscarVideojuegoCategoria(){
 
-void menuRanking(){}
+    IContVideojuego = Factorio->getICVideojuego();
+    IContCategoria = Factorio->getICCategoria();
+    Sesion* ses = Sesion::getInstancia();
+
+    if(ses->getEstado()){
+
+        map<string, DTCategoria*> dtcat = IContCategoria->listarCategorias();
+
+        if(!dtcat.empty()){
+
+            system("clear");
+            cout << "-----------------------------------" << endl;
+            cout << "- Buscar videojuego por categoría -" << endl;
+            cout << "-----------------------------------\n" << endl;  
+
+            cout << "- Categorías del sistema -" << endl;
+
+            for(map<string,DTCategoria*>::iterator it = dtcat.begin(); it != dtcat.end(); it++){
+                cout << "   " <<*(it->second) << endl;
+            }
+
+            string cat;
+            cout<< "\nSeleccione la categoria: ";
+            leerString(cat);
+            IContVideojuego->ingresarNombre(cat);
+
+            list <Videojuego*> juegos = IContVideojuego->buscarPorCategoria();
+            
+            if(!juegos.empty()){
+                system("clear");
+                cout << "- Videojuegos con categoria " << cat << " -"<< endl;
+                for(list<Videojuego*>::iterator it = juegos.begin(); it != juegos.end(); it++)
+                    cout << "   - Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
+            }else{
+                system("clear");
+                cout << "--------------------------------------------" << endl;
+                cout << "- No existen videojuegos con esa categoria -" << endl;
+                cout << "--------------------------------------------" << endl; 
+            }
+            
+        }else{
+
+            system("clear");
+            cout << "-------------------------" << endl;
+            cout << "- No existen categorias -" << endl;
+            cout << "-------------------------" << endl; 
+        }   
+    }else{
+        system("clear");
+        cout << "-----------------------" << endl;
+        cout << "- Debe iniciar sesion -" << endl;
+        cout << "-----------------------" << endl;    
+    }
+    
+}
+
+void menuRanking(){
+
+    IContVideojuego = Factorio->getICVideojuego();
+
+    if(esDesarrollador()){
+
+        system("clear");
+        cout << "--------------------------" << endl;
+        cout << "- Ranking de videojuegos -" << endl;
+        cout << "--------------------------\n" << endl; 
+        
+        cout << "Listar por puntuacion (0) o por horas (1): ";
+        int opcion;
+        cin >> opcion; 
+
+        list <DTVideojuego*> juegos = IContVideojuego->rankingVideojuegos(opcion);
+
+        system("clear");
+        cout << "\n- Listado de videojuegos -\n\n";
+
+        if(!juegos.empty()){
+                for(list<DTVideojuego*>::iterator it = juegos.begin(); it != juegos.end(); it++)
+                    cout << **(it)<< "\n--------------------------------------------------------------------------\n" << endl;
+        }else{
+                system("clear");
+                cout << "--------------------------" << endl;
+                cout << "- No existen videojuegos -" << endl;
+                cout << "--------------------------" << endl; 
+        }
+        
+
+    }else{
+        system("clear");
+        cout << "-----------------------" << endl;
+        cout << "- No es desarrollador -" << endl;
+        cout << "-----------------------\n" << endl;  
+    }
+
+}
 
 void menuVerPartidasVideojuego(){//24/06/22
     
@@ -936,23 +1128,31 @@ void menuVerPartidasVideojuego(){//24/06/22
 
         if(!juegos.empty()){
 
+            system("clear");
+            cout << "---------------------------------" << endl;
+            cout << "- Ver partidas de un videojuego -" << endl;
+            cout << "---------------------------------\n" << endl;  
+
             for(list<Videojuego*>::iterator it = juegos.begin(); it != juegos.end(); it++){
-                cout << "Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
+                cout << "   - Nombre: " << (*it)->getNombre() << " - Descripcion: " << (*it)->getDesc() << endl;
             }
 
             string juego;
-            cout<< "\nSeleccione el videojuego: \n"<< endl;
+            cout<< "\nSeleccione el videojuego: ";
             leerString(juego);
             IContVideojuego->ingresarNombre(juego);
             
             while(!IContVideojuego->buscarJuego()){
-                cout<< "\nSeleccione un nombre valido: \n"<< endl;
+                cout<< "Seleccione un nombre valido: ";
                 leerString(juego);
                 IContVideojuego->ingresarNombre(juego);
             }
             
             list<DTPartida*> partidas;
             partidas = IContVideojuego->verPartidas();
+
+            system("clear");
+            cout<< "\n - Partidas de " << juego << " -\n\n";
 
             for(list<DTPartida*>::iterator it = partidas.begin(); it != partidas.end(); it++){
 
@@ -973,6 +1173,7 @@ void menuVerPartidasVideojuego(){//24/06/22
 
         }else{
 
+            system("clear");
             cout << "-----------------------------" << endl;
             cout << "- No hay juegos registrados -" << endl;
             cout << "-----------------------------\n" << endl;  
@@ -980,6 +1181,7 @@ void menuVerPartidasVideojuego(){//24/06/22
         }
 
     }else{
+        system("clear");
         cout << "-----------------------" << endl;
         cout << "- No es desarrollador -" << endl;
         cout << "-----------------------\n" << endl;  
@@ -992,6 +1194,7 @@ int main() {
     //DEJAR AFUERA DEL WHILE
 
     Factorio = Fabrica::getInstancia();
+    firstLoad();
 
     //DEJAR AFUERA DEL WHILE
 
@@ -1061,10 +1264,12 @@ int main() {
                 break;
             case 12:
                 system("clear");
+                menuBuscarVideojuegoCategoria();
               
                 break;
             case 13:
                 system("clear");
+                menuRanking();
               
                 break;
             case 14:
@@ -1080,14 +1285,17 @@ int main() {
                 break;
                 
             default:
-                cout << "\nSeleccione una opcion valida\n" << endl;
+                system("clear");
+                cout << "--------------------------------" << endl;
+                cout << "- Seleccione una opcion valida -" << endl;
+                cout << "--------------------------------\n" << endl;  
                 break;
         }
             menu();
             cin.clear();
             cin >> opcion;
               }
-       cout << "\033[0;31mS̷͉͐ė̷͔ǵ̷̭m̶̠̚e̶͍̍n̷̙͋t̵͓͊á̸̫t̵̨̓i̸̊͜o̵͔̽ṉ̴͐ ̸̮̑F̸͖̈́a̴̧̽u̷͉̓l̷̼̋t̸̰͗ ̸̦̃(̶̝͝C̴̳͊o̸̝̔r̵̘̍e̵̘͝ ̷̨͊D̶͖͘ų̸͆m̸̺̌p̵̩̃ȅ̴͇d̸̘̃)̴̡̃ \033[0;31m\n" << endl; //debadelai xSanPrax pa los gamers
+       cout << "\033[0;31mS̷͉͐ė̷͔ǵ̷̭m̶̠̚e̶͍̍n̷̙͋t̵͓͊á̸̫t̵̨̓i̸̊͜o̵͔̽ṉ̴͐ ̸̮̑F̸͖̈́a̴̧̽u̷͉̓l̷̼̋t̸̰͗ ̸̦̃(̶̝͝C̴̳͊o̸̝̔r̵̘̍e̵̘͝ ̷̨͊D̶͖͘ų̸͆m̸̺̌p̵̩̃ȅ̴͇d̸̘̃)̴̡̃ \033[0;31m\n" << endl; //debadelai es la ley, ¿oiste ?iejo
     }
     catch (const std::exception& e)
     {

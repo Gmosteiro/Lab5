@@ -40,6 +40,57 @@
         }        
     }
 
+    list <Videojuego*> CVideojuego::buscarPorCategoria(){
+
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        list <Videojuego*> retorno;
+        map<string, Videojuego*> aux = mv->getVideojuegos();
+
+        for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){ 
+            Videojuego* v = it->second;   
+            map<string, Categoria*> cat = v->getCategorias();
+            map<string,Categoria*>::iterator itc = cat.find(this->nombre);    
+            
+            if(itc != cat.end()){
+                list<Videojuego*>::iterator itr = retorno.begin();
+                retorno.insert(itr, it->second);
+                itr++;
+            }
+        }
+
+        return retorno;
+
+    }
+
+    list <DTVideojuego*> CVideojuego::rankingVideojuegos(int opcion){
+
+        ManejadorVideojuego* mv = ManejadorVideojuego::getInstancia();
+        map<string, Videojuego*> aux = mv->getVideojuegos();
+        list <DTVideojuego*> retorno;
+        DTVideojuego* dt = NULL;
+
+        for(map<string,Videojuego*>::iterator it = aux.begin(); it != aux.end(); it++){
+            dt=it->second->getDTVideojuego();
+            list<DTVideojuego*>::iterator itr = retorno.begin();
+            retorno.insert(itr, dt);
+            itr++;
+        }
+            
+        //Listar por puntuacion(0) o por horas(1)
+        if(opcion==0){
+
+            retorno.sort([](DTVideojuego* & a, DTVideojuego* & b) { return a->getPuntaje() > b->getPuntaje(); });
+            
+        }else{
+
+            retorno.sort([](DTVideojuego* & a, DTVideojuego* & b) { return a->getTotalHoras() > b->getTotalHoras(); });
+            
+        }
+
+        return retorno;
+
+    }
+
     void CVideojuego::ingresarNombre(string nombre){
         this->nombre = nombre;
     }
